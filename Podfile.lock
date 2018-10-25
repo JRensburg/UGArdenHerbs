@@ -1,0 +1,53 @@
+PODS:
+  - Alamofire (4.7.3)
+  - Eureka (4.3.0)
+  - QRCode (2.0)
+  - RxAlamofire (4.3.0):
+    - RxAlamofire/Core (= 4.3.0)
+  - RxAlamofire/Core (4.3.0):
+    - Alamofire (~> 4.5)
+    - RxSwift (~> 4)
+  - RxCocoa (4.3.1):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.3.1)
+  - SimplePDF (3.0.0)
+  - SnapKit (4.2.0)
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - Alamofire
+  - Eureka
+  - QRCode
+  - RxAlamofire
+  - RxCocoa
+  - RxSwift
+  - SimplePDF
+  - SnapKit
+  - SVProgressHUD
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Eureka
+    - QRCode
+    - RxAlamofire
+    - RxCocoa
+    - RxSwift
+    - SimplePDF
+    - SnapKit
+    - SVProgressHUD
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Eureka: 6d711cb30ca333b4bc893110285a722ae3840114
+  QRCode: f98a1886c8f37523704a7512a4c0cd45b34c18a4
+  RxAlamofire: 09624d0f2d48ed8b686e4eb4cf68e28cbd2df556
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
+  SimplePDF: 903143ede36965886997a5c1bc6b8940b082ba20
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: ad3052f1bfa741519a527bf6a21eddd508ca14c6
+
+COCOAPODS: 1.5.2
