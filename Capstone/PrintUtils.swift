@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import SimplePDF
+//import SimplePDF
 import Eureka
 //TODO Implement
 //147 pixels wshould be 2 in. width

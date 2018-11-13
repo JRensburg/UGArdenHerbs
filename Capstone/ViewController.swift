@@ -9,7 +9,6 @@
 import UIKit
 import Eureka
 import SnapKit
-import SimplePDF
 import Alamofire
 import RxAlamofire
 import QRCode
@@ -54,57 +53,87 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
             <<< TextRow("Crop"){ row in
                 row.title = "Crop"
                 row.placeholder = "Enter text here"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< DateRow("Harvest Date"){ row in
                 row.title = "Harvest Date"
                 row.value = Date()
                 formatter = row.dateFormatter
-                }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
             <<< TextRow("Plot and Row"){
                 $0.title = "Plot and Row"
-        }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
             <<< IntRow("Feet Harvested"){
                 $0.title = "Number of Feet harvested"
-        }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
             <<< TextRow("Plant Part"){
                 $0.title = "Plant Part"
-        }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
             <<< DecimalRow("Harvest Weight"){
                 $0.title = "Harvest Weight"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
         }
         form +++ Section("QR Code")
             <<< ButtonRow(){
                 $0.title = "Generate Label"
                 $0.onCellSelection(self.makeOtherLabel)
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< ButtonRow(){
                 $0.title = "Scan Label"
                 $0.onCellSelection(self.showScanner)
-            }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+        }
         form +++ Section("Post-Production")
             <<< ActionSheetRow<String>("Drying Condition") {
                 $0.title = "Drying Condtition"
                 $0.selectorTitle = "Pick which drier was used"
                 $0.options = ["Industrial Drier","Outsdie drier","Air Dry","Dry Room"]
                 $0.value = "Dry Room"   // initially selected
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< IntRow("Temperature"){
                 $0.title = "Drying Temperature"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< IntRow("Relative Humidity"){
                 $0.title = "Relative Humidity"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< DateRow("Date Dried"){
                 $0.title = "Date Dried"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< IntRow("Dry Weight"){
                  $0.title = "Dry Weight"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< IntRow("Processed Weight"){
                  $0.title = "Processed Weight"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< TextRow("Lot Number"){
                  $0.title = "Lot Number"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
         }
         form +++ Section("Miscellaneous")
             <<< TextAreaRow("Notes")
@@ -112,11 +141,14 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
             <<< ButtonRow("Submit"){
                 $0.title = "Post!"
                 $0.onCellSelection(self.buttonTapped)
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< ButtonRow("Clear"){ row in
                 row.onCellSelection(self.buttonTapped)
                 }.cellUpdate{cell, row in
                     cell.textLabel?.attributedText = NSMutableAttributedString(string: "Clear Form", attributes: [.foregroundColor: UIColor.red])
+                    cell.height = {return 70}
         }
         navigationOptions = RowNavigationOptions.Enabled.union(.StopDisabledRow)
         animateScroll = true

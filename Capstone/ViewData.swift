@@ -31,7 +31,7 @@ class ViewData: UIViewController {
         configureProperties()
         configureLayout()
         
-        self.apiClient.pull(url: "https://api.airtable.com/v0/app2gxA4kdnENWzXO/Productionapi_key=keyGahK21OkwKGoI8").debug().bind(to: tableView.rx.items(cellIdentifier: "dryingCell")){ index, model, cell in
+        self.apiClient.pull(url: "https://api.airtable.com/v0/app2gxA4kdnENWzXO/Production?api_key=keyGahK21OkwKGoI8").debug().bind(to: tableView.rx.items(cellIdentifier: "dryingCell")){ index, model, cell in
             cell.textLabel?.text = model.fields.cropName ?? "No name entered"
         }.disposed(by: disposeBag)
         
@@ -83,7 +83,7 @@ class ViewData: UIViewController {
         }
         let segmentedControl = UISegmentedControl(items: ["Seeding","Drying","Tea"])
         segmentedControl.layer.masksToBounds = true
-        
+        segmentedControl.selectedSegmentIndex = 1
         tabs.addSubview(segmentedControl)
         segmentedControl.snp.makeConstraints{
             $0.edges.equalToSuperview().inset(15)
@@ -167,8 +167,13 @@ class APIClient<T:Codable> {
     func pull(url: String) -> Observable<([dryingModel])> {
         return request(.get, url).responseData()
             .map({ (Element) in
-                let root  = try JSONDecoder().decode(Root.self, from: Element.1)
-                return root.records
+                do{
+                    let  root = try JSONDecoder().decode(Root.self, from: Element.1)
+                    return root.records
+                }
+                catch {
+                    return [dryingModel.init(id: "Error", createdTime: "Error", fields: dryingData.init(cropName: "error", dateHarvested: nil, plotNrow: nil, feetHarvested: nil, plantPart: nil, harvestWeight: nil, dryingCondition: nil, temp: nil, humidity: nil, dateDried: nil, dryWeight: nil, processedWeight: nil, lotNumber: nil))]
+                }
             })
     }
     

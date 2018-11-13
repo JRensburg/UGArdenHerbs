@@ -21,7 +21,6 @@ target 'Capstone' do
   # Utils
   pod 'Alamofire'
   pod 'QRCode'
-  pod 'SimplePDF'
   
 end
 
