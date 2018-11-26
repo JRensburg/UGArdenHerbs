@@ -13,7 +13,7 @@ import Alamofire
 import RxAlamofire
 import QRCode
 import AVFoundation
-
+import SuggestionRow
 
 /*
  For reference: label may need to be around 2.4 inches to whatever length 
@@ -47,12 +47,19 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
     }
 
     func configureForm(){
-        form +++ Section("Pre-Production"){ section in
-            section.tag = "pre"
-            }
-            <<< TextRow("Crop"){ row in
-                row.title = "Crop"
-                row.placeholder = "Enter text here"
+        form +++ Section("Pre-Production")
+//            <<< TextRow("Crop"){ row in
+//                row.title = "Crop"
+//                row.placeholder = "Enter text here"
+//                }.cellUpdate{ cell, row in
+//                    cell.height = {return 70}
+//            }
+            <<< SuggestionAccessoryRow<String>("Crop"){
+                //$0.placeholder = "Enter Crop Name"
+                $0.title = "Crop Name"
+                $0.filterFunction = { text in
+                    options.filter({$0.hasPrefix(text)})
+                    }
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
@@ -65,7 +72,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
             }
             <<< TextRow("Plot and Row"){
                 $0.title = "Plot and Row"
-                }.cellUpdate{ cell, row in
+                }.cellUpdate{cell, row in
                     cell.height = {return 70}
             }
             <<< IntRow("Feet Harvested"){
@@ -73,11 +80,19 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
-            <<< TextRow("Plant Part"){
+            <<< SuggestionAccessoryRow<String>("Plant Part"){
                 $0.title = "Plant Part"
+                $0.filterFunction = { text in
+                    parts.filter({$0.hasPrefix(text)})
+                }
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
+//            <<< TextRow("Plant Part"){
+//                $0.title = "Plant Part"
+//                }.cellUpdate{ cell, row in
+//                    cell.height = {return 70}
+//            }
             <<< DecimalRow("Harvest Weight"){
                 $0.title = "Harvest Weight"
                 }.cellUpdate{ cell, row in
@@ -167,7 +182,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
     
     func makeOtherLabel(cell: ButtonCellOf<String>, row: ButtonRow) -> Void {
         var literalDict : [String:Any] = [:]
-        for item in form.sectionBy(tag: "pre")! {
+        for item in form.rows{// for item in form.sectionBy(tag: "pre")! {
             if let value = item.baseValue {
                 if(value is Date){
                     let val = formatter!.string(from: value as! Date)

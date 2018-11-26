@@ -22,17 +22,11 @@ class IntroView: UITableViewController{
    // self.tableView.backgroundView = UIImageView(image: UIImage(named: "dryHerbs.jpg"))
         self.view.backgroundColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1)
         let imageView = UIImageView(image: #imageLiteral(resourceName: "logo"))
-        imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: ((self.navigationController?.navigationBar.frame.height)! * 0.5
-        ))
+//        imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: ((self.navigationController?.navigationBar.frame.height)! * 0.95
+//
+        imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: (self.navigationController?.navigationBar.frame.size.height)!)
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
-        //self.navigationItem.titleView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: ((self.navigationController?.navigationBar.frame.height)! * 0.75
-        //))
-        self.navigationItem.titleView?.snp.makeConstraints{
-            $0.height.equalToSuperview().dividedBy(4)
-            $0.center.equalToSuperview()
-        }
-        //self.navigationItem.title = "UGArden"
         
     }
     
@@ -42,7 +36,7 @@ class IntroView: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.view.safeAreaLayoutGuide.layoutFrame.height / 4
+        return (self.view.frame.height-(self.navigationController?.navigationBar.frame.size.height)!) / 4
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

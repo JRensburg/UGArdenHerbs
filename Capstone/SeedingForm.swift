@@ -36,7 +36,7 @@ class SeedingForm: FormViewController, FormUtils {
             <<< TextRow("Plant:"){
                 $0.title = "Plant"
                 $0.placeholder = "Plant Name"
-                }.cellUpdate{ cell,row in
+                }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
             <<< DateRow("Date Started"){
@@ -70,7 +70,12 @@ class SeedingForm: FormViewController, FormUtils {
                 $0.placeholder = "Notes for any seed treatment"
                 }.cellUpdate{ cell,row in
                     cell.height = {return 70}
-        }
+            }
+            <<< DateRow("Date Planted"){
+                $0.title = "Date Planted"
+                }.cellUpdate{cell, row in
+                    cell.height = {return 70}
+            }
         form +++ Section("Submit")
             <<< ButtonRow("Submit"){
                 $0.title = "Submit"

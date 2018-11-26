@@ -38,6 +38,16 @@ extension PrintUtils where Self : HerbFormController{
             $0.left.top.equalToSuperview().offset(5)
         }
         
+        // FOR LABEL!!!!!
+        //
+        // Include Crop name first (duh)
+        // Then Date harvested
+        // Harvested Weight if (Dry and processed is nil)
+        // Dry weight
+        // Processed Weight
+        // Lot #
+        //
+        
         for (index,item) in info.enumerated() {
             var val = ""
             if let value = item.value {

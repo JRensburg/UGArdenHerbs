@@ -22,6 +22,7 @@ protocol FormUtils {
     func configureForm()
     
 }
+
 extension FormUtils where Self: FormViewController{
 
     func collectValues(values: [String:Any?]) -> [String:Any] {
@@ -92,3 +93,4 @@ extension FormUtils where Self: FormViewController{
     }
 
 }
+

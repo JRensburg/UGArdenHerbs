@@ -5,18 +5,20 @@ target 'Capstone' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for UGA
+  # Pods for UGArden :D
   # Architecture
 
   # Rx
   pod 'RxSwift'
   pod 'RxAlamofire'
   pod 'RxCocoa' 
+  pod 'RxDataSources'
 
   # UI
   pod 'SnapKit'
   pod 'Eureka'
   pod 'SVProgressHUD'
+  pod 'SuggestionRow'
     
   # Utils
   pod 'Alamofire'

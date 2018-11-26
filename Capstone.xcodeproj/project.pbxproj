@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		133919B421AB55C3000B7209 /* dataPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133919B321AB55C3000B7209 /* dataPopUpViewController.swift */; };
 		13410ACE217923920032FC6F /* font in Resources */ = {isa = PBXBuildFile; fileRef = 13410ACD217923920032FC6F /* font */; };
 		1342AA4C21802C4200863649 /* ViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342AA4B21802C4200863649 /* ViewData.swift */; };
 		134A7442213EC54900640347 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134A7441213EC54900640347 /* AppDelegate.swift */; };
@@ -22,10 +23,12 @@
 		13A3AD5B215A91270067A55D /* FormUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5A215A91270067A55D /* FormUtils.swift */; };
 		13A3AD5D215D5C1B0067A55D /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5C215D5C1B0067A55D /* QRScanner.swift */; };
 		13A3AD5F216404D80067A55D /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5E216404D80067A55D /* PrintUtils.swift */; };
+		13E5B6B8219B5DC300585B38 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E5B6B7219B5DC300585B38 /* DataModels.swift */; };
 		ED72D10C288E31B85F902328 /* Pods_Capstone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B0EE4F2CE969AE4E19E8A4 /* Pods_Capstone.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		133919B321AB55C3000B7209 /* dataPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = dataPopUpViewController.swift; path = Capstone/dataPopUpViewController.swift; sourceTree = "<group>"; };
 		13410ACD217923920032FC6F /* font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = font; sourceTree = "<group>"; };
 		1342AA4B21802C4200863649 /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
 		134A743E213EC54900640347 /* Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capstone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +46,7 @@
 		13A3AD5A215A91270067A55D /* FormUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUtils.swift; sourceTree = "<group>"; };
 		13A3AD5C215D5C1B0067A55D /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
 		13A3AD5E216404D80067A55D /* PrintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
+		13E5B6B7219B5DC300585B38 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		78B0EE4F2CE969AE4E19E8A4 /* Pods_Capstone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capstone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D185E87866B7D6A36AFD65 /* Pods-Capstone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capstone/Pods-Capstone.release.xcconfig"; sourceTree = "<group>"; };
 		E909F51D0F09B67BBE6B62F5 /* Pods-Capstone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capstone/Pods-Capstone.debug.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +67,7 @@
 		134A7435213EC54900640347 = {
 			isa = PBXGroup;
 			children = (
+				133919B321AB55C3000B7209 /* dataPopUpViewController.swift */,
 				134A7440213EC54900640347 /* Capstone */,
 				134A743F213EC54900640347 /* Products */,
 				629F385C2F7F76DE866E0EDA /* Pods */,
@@ -90,6 +95,7 @@
 				13A3AD5821543C8B0067A55D /* TeaForm.swift */,
 				13A3AD5421515C050067A55D /* TableViewController.swift */,
 				1342AA4B21802C4200863649 /* ViewData.swift */,
+				13E5B6B7219B5DC300585B38 /* DataModels.swift */,
 				135E79FF2194E34F00EB7932 /* DataViewPopUp.swift */,
 				134A7445213EC54900640347 /* Main.storyboard */,
 				134A744B213EC55200640347 /* Assets.xcassets */,
@@ -196,24 +202,32 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Capstone/Pods-Capstone-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SuggestionRow/SuggestionRow.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SuggestionRow.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -254,8 +268,10 @@
 				13A3AD57215437820067A55D /* SeedingForm.swift in Sources */,
 				13A3AD5521515C050067A55D /* TableViewController.swift in Sources */,
 				13A3AD5F216404D80067A55D /* PrintUtils.swift in Sources */,
+				13E5B6B8219B5DC300585B38 /* DataModels.swift in Sources */,
 				134A7442213EC54900640347 /* AppDelegate.swift in Sources */,
 				13A3AD5D215D5C1B0067A55D /* QRScanner.swift in Sources */,
+				133919B421AB55C3000B7209 /* dataPopUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -386,7 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
