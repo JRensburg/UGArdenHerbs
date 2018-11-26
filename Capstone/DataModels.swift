@@ -182,7 +182,7 @@ final class DisplayFieldCell : UITableViewCell, UITextFieldDelegate {
             $0.right.equalToSuperview()
             $0.left.equalTo(contentView.snp.centerX).offset(15)
         }
-        value.delegate = self
+      //  value.delegate = self
         value.clearButtonMode = .whileEditing
         backgroundView = nil
         backgroundColor = .clear

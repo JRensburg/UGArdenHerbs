@@ -10,15 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class DataViewPopUp : UIView, UITableViewDelegate{
+class DataViewPopUp : UIView, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate{
+
+    
    
     private let tableView = UITableView()
     let dispose = DisposeBag()
     let switchInt: Int
-    var model : Any
-    var dict : BehaviorRelay<[String:Any]>
-    //var model : dryingModel? = nil
-    //let modelInfo : Variable<dryingModel?> = Variable(nil)
+    var modelDict = [String:Any]()
+    lazy var values = modelDict.sorted(by: {$0.0 < $1.0})
     let update = UIButton()
     let delete = UIButton()
     let remove = UIButton()
@@ -26,15 +26,14 @@ class DataViewPopUp : UIView, UITableViewDelegate{
     
     init(section: Int, model: Any){
         let screen = UIScreen.main.bounds
-        self.model = model
+        //self.model = model
         switchInt = section
-       //
-        dict = BehaviorRelay.init(value: [:])
+
         super.init(frame: CGRect(x: 0, y: 0, width: screen.width / 1.5, height: screen.height / 1.5))
         configureButtons()
         layer.cornerRadius = 10
         layer.shadowColor = UIColor.black.cgColor
-        tableView.rx.setDelegate(self).disposed(by: dispose)
+        tableView.delegate = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -45,30 +44,8 @@ class DataViewPopUp : UIView, UITableViewDelegate{
             //self.model = model as? dryingModel
             //let modelInfo = Variable(model as? dryingModel)
             let data = (model as? dryingModel)?.fields
-            let killMe = BehaviorRelay.init(value: data)
-            dict.accept(killMe.value.dictionary)
-            Observable.from(optional: killMe.value.dictionary.sorted(by: {$0.0 < $1.0})).bind(to: tableView.rx.items(cellIdentifier: "dryCell", cellType: DisplayFieldCell.self)){index, item, cell in
-                cell.key.text = item.key
-                var val = item.value
-                if val as? Int == -1 {
-                    val = "No value"
-                }
-
-                cell.value.text = "\(val)"
-//                let fuckthis = cell.value.rx.text.orEmpty.asObservable().bind(to: newdict[item.key])
-//                }.disposed(by: dispose)
-
-//           let dict = Observable.from(optional:data.dictionary.sorted(by: {$0.0 < $1.0}))
-//            dict.bind(to: tableView.rx.items(cellIdentifier: "dryCell", cellType: DisplayFieldCell.self)){index, item, cell in
-//                cell.key.text = item.key
-//                var val = item.value
-//                if val as? Int == -1 {
-//                    val = "No value"
-//                }
-//                cell.value.text = "\(val)"
-//              //  cell.value.rx.controlEvent([.editingDidEnd]).asObservable().subscribe{print($0)}.disposed(by: self.dispose)
-//            }.disposed(by: dispose)
-            }
+            modelDict = data.dictionary
+            tableView.dataSource = self
             addSubview(tableView)
             tableView.snp.makeConstraints{
                 $0.width.equalToSuperview().inset(15)
@@ -77,11 +54,6 @@ class DataViewPopUp : UIView, UITableViewDelegate{
                 $0.centerX.equalToSuperview()
             }
             
-//            tableView.rx.itemDeselected.subscribe(onNext: {[weak self] indexPath in
-//                print("something happnening")
-//                let cell = self?.tableView.cellForRow(at: indexPath) as! DisplayFieldCell
-//                self?.dict[cell.key.text!] = cell.value.text
-//            }).disposed(by: dispose)
         default:
             //self.model = nil
             backgroundColor = .orange
@@ -129,7 +101,7 @@ class DataViewPopUp : UIView, UITableViewDelegate{
         
         editBarButton.setTitle("Submit Update", for: .normal)
         editBarButton.addTarget(self, action: #selector(SubmitClicked), for: .touchUpInside)
-       tableView.backgroundView = nil
+        tableView.backgroundView = nil
     }
 
     @objc func buttonTapped() -> Void {
@@ -143,6 +115,30 @@ class DataViewPopUp : UIView, UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle.delete
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return values.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dryCell") as! DisplayFieldCell
+        let newVal = values[indexPath.row]
+        var val = newVal.value
+        if val as? Int == -1 {
+            val = "No value"
+        }
+        //print("dequeue row at")
+        cell.value.delegate = self
+        cell.value.text = "\(val)"
+        cell.key.text = newVal.key; cell.value.placeholder = "\(val)"
+        return cell
+    
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let indexOf = (modelDict as NSDictionary).allKeys(for: textField)
+        
     }
     
     @objc func editTapped() -> Void {
@@ -169,8 +165,7 @@ class DataViewPopUp : UIView, UITableViewDelegate{
     
     
     @objc func SubmitClicked() -> Void {
-        
-        print(dict)
+        print("foo")
     }
     
     @objc func keyBoardWillShow( _ notification: Notification){
@@ -184,6 +179,9 @@ class DataViewPopUp : UIView, UITableViewDelegate{
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
+    
+    
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
