@@ -19,11 +19,10 @@ class IntroView: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   // self.tableView.backgroundView = UIImageView(image: UIImage(named: "dryHerbs.jpg"))
+   
         self.view.backgroundColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1)
         let imageView = UIImageView(image: #imageLiteral(resourceName: "logo"))
-//        imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: ((self.navigationController?.navigationBar.frame.height)! * 0.95
-//
+
         imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: (self.navigationController?.navigationBar.frame.size.height)!)
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
@@ -88,35 +87,10 @@ class IntroCell : UITableViewCell {
     
     @IBOutlet var backgroundImage: UIImageView!
 
-//    override var frame: CGRect {
-//        get {
-//            return super.frame
-//        }
-//        set (newFrame) {
-//            var frame =  newFrame
-//            frame.origin.y += 4
-//            frame.size.height -= 2 * 5
-//            super.frame = frame
-//        }
-//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundImage.contentMode = .center
-        
-//        let effect = UIBlurEffect(style: .extraLight)
-//        let effectView = UIVisualEffectView(effect: effect)
-//        effectView.frame = self.contentView.frame
-//        self.backgroundImage.addSubview(effectView)
-//
-//        self.contentView.backgroundColor = .clear
-//        let whiteRoundedView : UIView = UIView(frame: CGRect(x: 10, y: 8, width: self.frame.size.width - 20, height: self.frame.height - 10))
-//        whiteRoundedView.layer.backgroundColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1).cgColor
-//        whiteRoundedView.layer.masksToBounds = false
-//        whiteRoundedView.layer.cornerRadius = 2.0
-//        whiteRoundedView.layer.shadowOffset = CGSize(width: -1, height: 1)
-//        whiteRoundedView.layer.shadowOpacity = 0.2
-//        backgroundImage.addSubview(whiteRoundedView)
     }
     
 }

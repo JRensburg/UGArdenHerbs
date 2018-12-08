@@ -13,47 +13,37 @@ import RxCocoa
 import RxSwift
 import RxAlamofire
 
-class ViewData: UIViewController {
-
+class ViewData: UIViewController, navDelegate {
+    
     private let tableView = UITableView()
     private let label = UILabel()
-    
+    let reload = PublishSubject<Any>.init()
+    let imABadProgrammer = BehaviorSubject<String>(value: "oof")
     let segmentContainer = UIView()
     let tabs = UIView()
+    let urls = ["https://api.airtable.com/v0/appKc1Zd3BiaCTlOs/Seed%20Data?api_key=keyhr7xMO6nFfKreF&sort%5B0%5D%5Bfield%5D=Date+Started&sort%5B0%5D%5Bdirection%5D=desc","https://api.airtable.com/v0/apptgk0JBqpaqbtT4/Drying%20Data?api_key=keyhr7xMO6nFfKreF&sort%5B0%5D%5Bfield%5D=Harvest+Date&sort%5B0%5D%5Bdirection%5D=desc","https://api.airtable.com/v0/app0rj69BsqZwu9pS/Tea%20Data?api_key=keyhr7xMO6nFfKreF&sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=desc"]
     private let disposeBag = DisposeBag()
-    private let apiClient = APIClient<dryingModel>()
-    var data : Observable<[dryingData]>?
-    //let viewModel : dryingModel
-    var segmentedControl : UISegmentedControl?
+    private let apiClient = APIClient<dataModel>()
+    let segment : ControlProperty<Int>
+    
+    let segmentedControl : UISegmentedControl
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //These methods setup views and properties. I generally dislike having really long viewDidLoads()
         configureProperties()
         configureLayout()
-        self.apiClient.pull(url: "https://api.airtable.com/v0/app2gxA4kdnENWzXO/Production?api_key=keyGahK21OkwKGoI8").bind(to: tableView.rx.items(cellIdentifier: "dryingCell", cellType: CustomCell.self )){ index, model, cell in
-            cell.title.text = model.fields.cropName
-            cell.date.text = ((model.fields.dateHarvested != "No value") ? "Harvested: " + model.fields.dateHarvested : "")
-            cell.date2.text = ((model.fields.dateDried != "No value") ? "Dried: " + model.fields.dateDried : "")
-            cell.model = model
-            //cell.date.text = model.fields.dateDried ?? (model.fields.dateHarvested ?? "")
-            //cell.model = model
-        }.disposed(by: disposeBag)
-        
-        
+    
         tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
             let cell = self?.tableView.cellForRow(at: indexPath) as! CustomCell
-//            let popUp = dataPopUpViewController()
-//            self!.view.addSubview(popUp.view)
-//            popUp.view.snp.makeConstraints{
-//               $0.center.equalToSuperview()
-//                $0.height.width.equalToSuperview().dividedBy(1.5)
-//            }
-//            popUp.didMove(toParentViewController: self)
-            let infoView = DataViewPopUp(section: (self?.segmentedControl!.selectedSegmentIndex)!, model: cell.model!)
+            let infoView = DataViewPopUp(section: (self?.segmentedControl.selectedSegmentIndex)!, model: cell.model!)
+            infoView.navdelgate = self
             self?.view.addSubview(infoView)
             infoView.center = (self?.view.center)!
             self!.flipSubViews()
             infoView.rx.deallocated.subscribe{self?.flipSubViews()}.disposed(by: self!.disposeBag)
+            self?.tableView.deselectRow(at: indexPath, animated: true)
             
         }).disposed(by: disposeBag)
         
@@ -61,16 +51,37 @@ class ViewData: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        segmentedControl = UISegmentedControl(items: ["Seeding","Drying","Tea"])
+        segment = segmentedControl.rx.selectedSegmentIndex
         super.init(coder: aDecoder)
+        segmentedControl.selectedSegmentIndex = 1
+        imABadProgrammer.onNext("b")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    
     }
 
+    //This is where the tableview is bound to the data
     private func configureProperties(){
         tableView.register(CustomCell.self, forCellReuseIdentifier: "dryingCell")
+    
+        let models = Observable.combineLatest(self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))), segment, imABadProgrammer){_ , index, hmm in
+                print(hmm)
+                return self.urls[index]
+            }.flatMapLatest({self.apiClient.pull(url: $0)})
+        models.flatMapLatest({data -> Observable<[dataModel]> in
+            var model = data
+            model.insert(dataModel(id: "Header", createdTime: "Now", fields: AnyFormModel(index: self.segmentedControl.selectedSegmentIndex)), at: 0)
+            return Observable.just(model)
+        }).bind(to: tableView.rx.items(cellIdentifier: "dryingCell", cellType: CustomCell.self )){ index, model, cell in
+            //Configures the cell according to which data it is given
+            cell.layoutCell(model: model, segmentIndex:    self.segmentedControl.selectedSegmentIndex)
+            }.disposed(by: disposeBag)
     }
+    
+    //Mostly used to set up the segmented control to be friendly with the tableview
     private func configureLayout(){
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -78,12 +89,8 @@ class ViewData: UIViewController {
         segmentContainer.layer.zPosition = 10
         tabs.translatesAutoresizingMaskIntoConstraints = false
         segmentContainer.translatesAutoresizingMaskIntoConstraints = false
-        //segmentContainer.backgroundColor(
-        
-        
         view.addSubview(segmentContainer)
         segmentContainer.snp.makeConstraints{
-           // $0.edges.equalToSuperview()
             $0.left.right.equalToSuperview()
             $0.top.equalTo(self.view.snp.top).inset((self.navigationController?.navigationBar.frame.size.height ?? 15) + 15)
             $0.height.equalToSuperview().dividedBy(12)
@@ -99,19 +106,19 @@ class ViewData: UIViewController {
             $0.left.right.bottom.equalToSuperview()
             $0.top.equalTo(segmentContainer.snp.bottom)
         }
-        segmentedControl = UISegmentedControl(items: ["Seeding","Drying","Tea"])
-        segmentedControl!.layer.masksToBounds = true
-        segmentedControl!.selectedSegmentIndex = 1
-        tabs.addSubview(segmentedControl!)
-        segmentedControl!.snp.makeConstraints{
+       
+        segmentedControl.layer.masksToBounds = true
+ 
+        tabs.addSubview(segmentedControl)
+        segmentedControl.snp.makeConstraints{
             $0.edges.equalToSuperview().inset(15)
         }
-        segmentedControl!.rx.value
-        .subscribe{print($0)}
-        .disposed(by: disposeBag)
+      
     }
     
-    func flipSubViews(){
+    //Disables userinteraction when a popup view is
+    //It is called when the View is instantiated and is called again when the view is deallocated. Also a way to force me to watch out for memory leaks :D
+    @objc func flipSubViews(){
         for subs in self.view.subviews {
             if subs is DataViewPopUp{
                 subs.isUserInteractionEnabled = true
@@ -122,10 +129,22 @@ class ViewData: UIViewController {
         }
     }
     
+    /*
+    // Delegate function that lets me navigate from this viewcontroller to the formViewController needed when editing entries
+    // The popUp view is specifically a UIView, so delegation was neccessary to let me navigate to the proper formView given info processed in the DataViewPopUp class
+    */
+    func navigate(viewController: DataViewForm) {
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    func presentAlert(alert: UIAlertController) {
+        self.present(alert, animated: true, completion: {
+            print("well shit")
+        })
+    }
+    func refresh() {
+        imABadProgrammer.onNext("delete Done")
+    }
 }
-
-
-
 
 
 //            let infoView = DataViewPopUp(section: (self?.segmentedControl!.selectedSegmentIndex)!, model: cell.model!)

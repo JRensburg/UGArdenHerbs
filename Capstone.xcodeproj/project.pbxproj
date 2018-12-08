@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		133919B421AB55C3000B7209 /* dataPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133919B321AB55C3000B7209 /* dataPopUpViewController.swift */; };
 		13410ACE217923920032FC6F /* font in Resources */ = {isa = PBXBuildFile; fileRef = 13410ACD217923920032FC6F /* font */; };
 		1342AA4C21802C4200863649 /* ViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342AA4B21802C4200863649 /* ViewData.swift */; };
 		134A7442213EC54900640347 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134A7441213EC54900640347 /* AppDelegate.swift */; };
@@ -17,6 +16,8 @@
 		134A744C213EC55200640347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 134A744B213EC55200640347 /* Assets.xcassets */; };
 		134A744F213EC55200640347 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134A744D213EC55200640347 /* LaunchScreen.storyboard */; };
 		135E7A002194E34F00EB7932 /* DataViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135E79FF2194E34F00EB7932 /* DataViewPopUp.swift */; };
+		136BCBEC21ACAA1B0039BA82 /* DataViewForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */; };
+		1396C75621B6133D00A451E2 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1396C75521B6133D00A451E2 /* TableViewCells.swift */; };
 		13A3AD5521515C050067A55D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5421515C050067A55D /* TableViewController.swift */; };
 		13A3AD57215437820067A55D /* SeedingForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD56215437820067A55D /* SeedingForm.swift */; };
 		13A3AD5921543C8B0067A55D /* TeaForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5821543C8B0067A55D /* TeaForm.swift */; };
@@ -28,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		133919B321AB55C3000B7209 /* dataPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = dataPopUpViewController.swift; path = Capstone/dataPopUpViewController.swift; sourceTree = "<group>"; };
 		13410ACD217923920032FC6F /* font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = font; sourceTree = "<group>"; };
 		1342AA4B21802C4200863649 /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
 		134A743E213EC54900640347 /* Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capstone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +40,8 @@
 		134A744E213EC55200640347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		134A7450213EC55200640347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		135E79FF2194E34F00EB7932 /* DataViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewPopUp.swift; sourceTree = "<group>"; };
+		136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewForm.swift; sourceTree = "<group>"; };
+		1396C75521B6133D00A451E2 /* TableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
 		13A3AD5421515C050067A55D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		13A3AD56215437820067A55D /* SeedingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedingForm.swift; sourceTree = "<group>"; };
 		13A3AD5821543C8B0067A55D /* TeaForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaForm.swift; sourceTree = "<group>"; };
@@ -67,7 +69,6 @@
 		134A7435213EC54900640347 = {
 			isa = PBXGroup;
 			children = (
-				133919B321AB55C3000B7209 /* dataPopUpViewController.swift */,
 				134A7440213EC54900640347 /* Capstone */,
 				134A743F213EC54900640347 /* Products */,
 				629F385C2F7F76DE866E0EDA /* Pods */,
@@ -92,6 +93,7 @@
 				13A3AD5C215D5C1B0067A55D /* QRScanner.swift */,
 				13A3AD5A215A91270067A55D /* FormUtils.swift */,
 				13A3AD56215437820067A55D /* SeedingForm.swift */,
+				136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */,
 				13A3AD5821543C8B0067A55D /* TeaForm.swift */,
 				13A3AD5421515C050067A55D /* TableViewController.swift */,
 				1342AA4B21802C4200863649 /* ViewData.swift */,
@@ -103,6 +105,7 @@
 				134A7450213EC55200640347 /* Info.plist */,
 				134A7448213EC54900640347 /* Capstone.xcdatamodeld */,
 				13410ACD217923920032FC6F /* font */,
+				1396C75521B6133D00A451E2 /* TableViewCells.swift */,
 			);
 			path = Capstone;
 			sourceTree = "<group>";
@@ -267,11 +270,12 @@
 				1342AA4C21802C4200863649 /* ViewData.swift in Sources */,
 				13A3AD57215437820067A55D /* SeedingForm.swift in Sources */,
 				13A3AD5521515C050067A55D /* TableViewController.swift in Sources */,
+				136BCBEC21ACAA1B0039BA82 /* DataViewForm.swift in Sources */,
 				13A3AD5F216404D80067A55D /* PrintUtils.swift in Sources */,
 				13E5B6B8219B5DC300585B38 /* DataModels.swift in Sources */,
 				134A7442213EC54900640347 /* AppDelegate.swift in Sources */,
 				13A3AD5D215D5C1B0067A55D /* QRScanner.swift in Sources */,
-				133919B421AB55C3000B7209 /* dataPopUpViewController.swift in Sources */,
+				1396C75621B6133D00A451E2 /* TableViewCells.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,4 +1,4 @@
-
+ 
 //
 //  SeedingForm.swift
 //  Capstone
@@ -11,18 +11,16 @@ import Foundation
 import UIKit
 import SnapKit
 import Eureka
+import SuggestionRow
 import Alamofire
 
-class SeedingForm: FormViewController, FormUtils {
-    var sendUrl: String = ""
-    
-    var postUrl: String = ""
-    
-    
+ class SeedingForm: FormViewController, FormUtils {
+    var postUrl: String = "https://api.airtable.com/v0/appKc1Zd3BiaCTlOs/Seed%20Data?api_key=keyhr7xMO6nFfKreF&Content-Type=application/json"
     let APIkey = "keyGahK21OkwKGoI8"
-    let whyDontThisWork : HTTPHeaders = [
-        "api_key" : "keyGahK21OkwKGoI8"
-    ]
+    
+//    let whyDontThisWork : HTTPHeaders = [
+//        "api_key" : "keyGahK21OkwKGoI8"
+//    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +31,17 @@ class SeedingForm: FormViewController, FormUtils {
     func configureForm(){
         
         form +++ Section("Seeding Form")
-            <<< TextRow("Plant:"){
-                $0.title = "Plant"
-                $0.placeholder = "Plant Name"
+//            <<< TextRow("Plant Name"){
+//                $0.title = "Plant"
+//                $0.placeholder = "Plant Name"
+//                }.cellUpdate{ cell, row in
+//                    cell.height = {return 70}
+//            }
+            <<< SuggestionAccessoryRow<String>("Plant Name"){
+                $0.title = "Crop Name"
+                $0.filterFunction = { text in
+                options.filter({$0.hasPrefix(text)})
+                }
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
@@ -45,23 +51,18 @@ class SeedingForm: FormViewController, FormUtils {
                 }.cellUpdate{ cell,row in
                     cell.height = {return 70}
             }
-            <<< IntRow("Number Seedlings"){
-                $0.title = "Total # of seeds planted/cuttings"
+            <<< IntRow("Total # of Seeds"){
+                $0.title = "Number of seeds planted/cuttings"
                 }.cellUpdate{ cell,row in
                     cell.height = {return 70}
             }
-            <<< DateRow("Date Germination"){
+            <<< DateRow("Date of Germination"){
                 $0.title = "Date of First Germination"
                 }.cellUpdate{ cell,row in
                     cell.height = {return 70}
             }
-            <<< IntRow("Number germintated"){
+            <<< IntRow("Total Number Germinated"){
                 $0.title = "Total Number Germinated"
-                }.cellUpdate{ cell,row in
-                    cell.height = {return 70}
-            }
-            <<< DecimalRow("Percentage"){
-                $0.title = "Percentage Germinated"
                 }.cellUpdate{ cell,row in
                     cell.height = {return 70}
             }

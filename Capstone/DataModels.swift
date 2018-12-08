@@ -14,38 +14,54 @@ import RxCocoa
 import SnapKit
 import SuggestionRow
 
-protocol APIRequest {
-    var method: HTTPMethod {get}
-    var path: String { get }
-    //var parameters: [String : String] { get }
-}
-
-extension APIRequest {
-    func request() -> URLRequest {
-        
-        var request = URLRequest(url: URL(string: path)!)
-        request.httpMethod = method.rawValue
-        //request.addValue("application/json", forHTTPHeaderField: "Accept")
-        return request
+//This is the magical part that lets me return any of the three streams (in ViewData.swift) as simply a stream of dataModel
+struct AnyFormModel: Decodable {
+    init(index: Int){
+        value = 1
     }
+    init(from decoder: Decoder) throws {
+        if let data = try? SeedingData(from: decoder){
+            value = data
+            return
+        }
+        if let data = try? TeaData(from: decoder){
+            value = data
+            return
+        }
+        if let data = try? DryingData(from: decoder){
+            value = data
+            return
+        }
+        value = ""
+    }
+    var value: Any
 }
 
-class DryingRequest : APIRequest {
-    var method = HTTPMethod.get
-    var path = "https://api.airtable.com/v0/app2gxA4kdnENWzXO/Production?api_key=keyGahK21OkwKGoI8"
-    
+/*
+//The root structure. The JSON response when pulling a base is in the form
+ // "records":[{ id : someValue,
+ createdTime : "time",
+ fields : {The various fields in the table}
+*/
+struct Root: Decodable {
+    var records : [dataModel]
 }
-
-struct Root: Codable {
-    let records : [dryingModel]
-}
-struct dryingModel: Codable{
+struct dataModel: Decodable{
     let id: String
     let createdTime: String
-    let fields: dryingData
+    let fields: AnyFormModel
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case createdTime
+        case fields
+    }
 }
-
-struct dryingData : Codable {
+/*
+//For Data from the drying form. Really long, but this way I can have default values.
+//(It was more convenient at the time for me to assign default values to the struct itself - the Rx binding to tableview was unhappy with nil or empty values and I hadn't thought of defining a protocol to lay out the cells)
+ */
+struct DryingData : Codable {
     
     var cropName: String
     var dateHarvested: String
@@ -95,130 +111,90 @@ struct dryingData : Codable {
         self.lotNumber = try container.decodeWrapper(key: .lotNumber, defaultValue: "No value")
     
     }
+}
+//This is for data from the seeding form
+struct SeedingData : Codable {
+    var numberGerminated : Int
+    var dateStarted : String
+    var dateGerminated : String
+    var totalSeeds : Int
+    var percentageGerminated : Double
+    var plantName : String
+    var datePlanted : String
+    
+    private enum CodingKeys: String, CodingKey {
+        case numberGerminated = "Total Number Germinated"
+        case dateStarted = "Date Started"
+        case dateGerminated = "Date of Germination"
+        case totalSeeds = "Total # of Seeds"
+        case percentageGerminated = "Percentage Germinated"
+        case plantName = "Plant Name"
+        case datePlanted = "Date Planted"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.numberGerminated = try container.decodeWrapper(key: .numberGerminated, defaultValue: -1)
+        self.dateStarted = try container.decodeWrapper(key: .dateStarted, defaultValue: "No value")
+        self.dateGerminated = try container.decodeWrapper(key: .dateGerminated, defaultValue: "No value")
+        self.totalSeeds = try container.decodeWrapper(key: .totalSeeds, defaultValue: -1)
+        self.percentageGerminated = (try container.decodeWrapper(key: .percentageGerminated, defaultValue: -1.0) * 100).rounded() / 100
+        self.plantName = try container.decode(String.self, forKey: .plantName)
+        self.datePlanted = try container.decodeWrapper(key: .datePlanted, defaultValue: "No value")
+    }
+}
 
+//And finally the tea data model
+struct TeaData : Codable {
+    var batchNumber: String
+    var date: String
+    var lotNumber: String
+    var teaBlend : String
+    
+    private enum CodingKeys: String, CodingKey {
+        case batchNumber = "Batch Number"
+        case date = "Date"
+        case lotNumber = "Lot Number"
+        case teaBlend = "Tea Blend"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.batchNumber  = try container.decodeWrapper(key: .batchNumber, defaultValue: "No value")
+        self.date = try container.decodeWrapper(key: .date, defaultValue: "No value")
+        self.lotNumber  = try container.decodeWrapper(key: .lotNumber, defaultValue: "No value")
+        self.teaBlend = try container.decode(String.self, forKey: .teaBlend)
+    }
 }
 
 
-public class APIClient<T:Codable> {
+
+
+
+
+//Pulls data with the given data and decodes it into my custom data types.
+public class APIClient<T:Decodable> {
     
-    func pull(url: String) -> Observable<([dryingModel])> {
+    func pull(url: String) -> Observable<[dataModel]> {
         return request(.get, url).responseData()
             .map({ (Element) in
                 do{
-                    let  root = try JSONDecoder().decode(Root.self, from: Element.1)
-                    return root.records
+                        let  root = try JSONDecoder().decode(Root.self, from: Element.1)
+                        return root.records
                 }
                 catch {
                     fatalError()
-//                    return [dryingModel.init(id: "Error", createdTime: "Error", fields: dryingData.init(cropName: "No value", dateHarvested: "No value", plotNrow: "No value", feetHarvested: -1, plantPart: "No value", harvestWeight: -1, dryingCondition: "No value", temp: -1, humidity: -1, dateDried: "No value", dryWeight: -1, processedWeight: -1, lotNumber: "No value"))]
                 }
             })
     }
-    
 }
 
-public final class CustomCell : UITableViewCell {
-    
-    var model: dryingModel?
-    
-    var title = UILabel()
-    var date = UILabel()
-    var date2 = UILabel()
-    var color = UIColor.clear
-    
-    override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(title)
-        title.snp.makeConstraints{
-            $0.height.equalToSuperview()
-            $0.width.equalToSuperview().dividedBy(4)
-            $0.left.equalToSuperview().offset(50)
-        }
-        contentView.addSubview(date)
-        date.snp.makeConstraints{
-            $0.height.equalToSuperview()
-            $0.width.equalToSuperview().dividedBy(4)
-            $0.left.equalTo(title.snp.right)
-        }
-        contentView.addSubview(date2)
-        date2.snp.makeConstraints{
-            $0.height.equalToSuperview()
-            $0.width.equalToSuperview().dividedBy(4)
-            $0.left.equalTo(date.snp.right).offset(20)
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    override public func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
-    
-}
-final class DisplayFieldCell : UITableViewCell, UITextFieldDelegate {
-    
-    let dispose = DisposeBag()
-    var key = UILabel()
-    var value : UITextField
-    var color = UIColor.clear
-    
-    override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        value = UITextField()
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        contentView.addSubview(key)
-        key.textAlignment = .left
-        key.snp.makeConstraints{
-            $0.height.equalToSuperview()
-            $0.width.equalToSuperview().dividedBy(3)
-            $0.right.equalTo(contentView.snp.centerX)
-        }
-        contentView.addSubview(value)
-        value.textAlignment = .left
-        value.snp.makeConstraints{
-            $0.height.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.left.equalTo(contentView.snp.centerX).offset(15)
-        }
-      //  value.delegate = self
-        value.clearButtonMode = .whileEditing
-        backgroundView = nil
-        backgroundColor = .clear
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    override public func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return false
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.text == "No value" {textField.text = ""}
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.text == "" {
-            textField.text = "No value"
-        }
-    }
-    
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        return false
-    }
-    
-}
-
+//Not Really Data Models, but used for the suggestion rows
 public let options = ["Hops","Luffa","Passionflower","Blue vervain","Echinacea"," Elecampane","Garden Sage","Goldenrod","Gotu Kola","Lavender (english)","Lemon Balm","Lemon verbena","Mint Licorice","Motherwort","Mugwort","Oregano","Peppermint","Rosemary","Skullcap (official)"," Stevia","Stinging Nettle","Thyme (English)","Violet","Yarrow","Ashwagandha, Vedic","Burdock, gobo", "Calendula, orange","Callifornia Poppy","Chamomile, german", "Cilantro","Dandelion, wild","Hibiscus","Lemongrass","Parsley","Plantain","Red Clover","Temperate Tulsi","Turmeric","Ginger","Blueberry leaves","Comfrey, Russian","Elderberries","Hawthorne","Licorice","Red raspberry","Rose","Ted Rose","Sumac","Yaupon Holly"]
 public let parts = ["Herb","Flowering Tops","Leaf","Flower","Root","Calyx"]
 
+//Convenience Methods that convert my data structs to dictionaries. Used primarily by DataViewPopUp to fill out the forms
 extension Encodable {
     subscript(key: String) -> Any? {
         return dictionary[key]
@@ -236,5 +212,12 @@ extension KeyedDecodingContainer {
     func decodeWrapper<T>(key: K, defaultValue: T) throws -> T
         where T : Decodable {
             return try decodeIfPresent(T.self, forKey: key) ?? defaultValue
+    }
+}
+
+//Lets me check whether the cells should be red. Returns false if any of the fields have one of the default values (-1 or "No Value")
+extension AnyFormModel{
+    func isComplete() -> Bool {
+        return ((self.value as! Encodable).dictionary.filter{return ($0.value as? String == "No value" || $0.value as? Int == -1)}.count > 0)
     }
 }

@@ -24,12 +24,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
     var previewLayer: AVCaptureVideoPreviewLayer!
 
     var formatter : DateFormatter?
-    let APIkey = "keyGahK21OkwKGoI8"
-    let whyDontThisWork : HTTPHeaders = [
-        "api_key" : "keyGahK21OkwKGoI8"
-    ]
-    var sendUrl = "https://api.airtable.com/v0/app2gxA4kdnENWzXO/Production?api_key=keyGahK21OkwKGoI8&Content-Type=application/json"
-    var postUrl = "https://api.airtable.com/v0/app2gxA4kdnENWzXO/Production?api_key=keyGahK21OkwKGoI8&Content-Type=application/json"
+    var postUrl = "https://api.airtable.com/v0/apptgk0JBqpaqbtT4/Drying%20Data?api_key=keyhr7xMO6nFfKreF&Content-Type=application/json"
     var qrData = ""
     let submit = UIButton()
     
@@ -76,7 +71,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
                     cell.height = {return 70}
             }
             <<< IntRow("Feet Harvested"){
-                $0.title = "Number of Feet harvested"
+                $0.title = "Feet harvested"
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
@@ -115,7 +110,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
             <<< ActionSheetRow<String>("Drying Condition") {
                 $0.title = "Drying Condtition"
                 $0.selectorTitle = "Pick which drier was used"
-                $0.options = ["Industrial Drier","Outsdie drier","Air Dry","Dry Room"]
+                $0.options = ["Industrial Drier","Outside Drier","Air Dry","Dry Room"]
                 $0.value = "Dry Room"   // initially selected
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
@@ -231,7 +226,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
             }
             form.rowBy(tag: item.key)?.reload(with: .bottom)//.updateCell()
         }
-        
+        self.tableView.reloadData()
     }
 
 }

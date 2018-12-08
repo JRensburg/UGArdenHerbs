@@ -13,14 +13,7 @@ import Eureka
 import Alamofire
 
 class TeaForm: FormViewController, FormUtils {
-    var sendUrl = "BLAH BLAH"
-    
-    var postUrl = "Blah Blah"
-    
-    let APIkey = "keyGahK21OkwKGoI8"
-    let whyDontThisWork : HTTPHeaders = [
-        "api_key" : "keyGahK21OkwKGoI8"
-    ]
+    var postUrl = "https://api.airtable.com/v0/app0rj69BsqZwu9pS/Tea%20Data?api_key=keyhr7xMO6nFfKreF&Content-Type=application/json"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,24 +29,36 @@ class TeaForm: FormViewController, FormUtils {
         form +++ Section("Tea Production")
             <<< DateRow("Date"){
                 $0.title = "Date"
-        }
+                $0.value = Date()
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
             <<< TextRow("Tea Blend"){
                 $0.title = "Tea Blend"
-        }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
             <<< TextRow("Batch Number"){
                 $0.title = "Batch Number"
-        }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
             <<< TextRow("Lot Number"){
                 $0.title = "Lot Number"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
         }
         form +++ Section("Submit")
             <<< ButtonRow("Submit"){
                 $0.title = "Post!"
                 $0.onCellSelection(self.buttonTapped)
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
             }
             <<< ButtonRow("Clear"){ row in
                 row.onCellSelection(self.buttonTapped)
                 }.cellUpdate{cell, row in
+                    cell.height = {return 70}
                     cell.textLabel?.attributedText = NSMutableAttributedString(string: "Clear Form", attributes: [.foregroundColor: UIColor.red])
         }
     }
