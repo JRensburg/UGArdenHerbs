@@ -19,9 +19,10 @@ class ViewData: UIViewController, navDelegate {
     private let label = UILabel()
     let reload = PublishSubject<Any>.init()
     let imABadProgrammer = BehaviorSubject<String>(value: "oof")
+    //&sort%5B0%5D%5Bfield%5D=Date+Started&sort%5B0%5D%5Bdirection%5D=desc
     let segmentContainer = UIView()
     let tabs = UIView()
-    let urls = ["https://api.airtable.com/v0/appKc1Zd3BiaCTlOs/Seed%20Data?api_key=keyhr7xMO6nFfKreF&sort%5B0%5D%5Bfield%5D=Date+Started&sort%5B0%5D%5Bdirection%5D=desc","https://api.airtable.com/v0/apptgk0JBqpaqbtT4/Drying%20Data?api_key=keyhr7xMO6nFfKreF&sort%5B0%5D%5Bfield%5D=Harvest+Date&sort%5B0%5D%5Bdirection%5D=desc","https://api.airtable.com/v0/app0rj69BsqZwu9pS/Tea%20Data?api_key=keyhr7xMO6nFfKreF&sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=desc"]
+    let urls = ["https://api.airtable.com/v0/appKc1Zd3BiaCTlOs/Seed%20Data?api_key=keyhr7xMO6nFfKreF","https://api.airtable.com/v0/apptgk0JBqpaqbtT4/Drying%20Data?api_key=keyhr7xMO6nFfKreF&sort%5B0%5D%5Bfield%5D=Harvest+Date&sort%5B0%5D%5Bdirection%5D=desc","https://api.airtable.com/v0/app0rj69BsqZwu9pS/Tea%20Data?api_key=keyhr7xMO6nFfKreF&sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=desc"]
     private let disposeBag = DisposeBag()
     private let apiClient = APIClient<dataModel>()
     let segment : ControlProperty<Int>
@@ -35,7 +36,7 @@ class ViewData: UIViewController, navDelegate {
         configureProperties()
         configureLayout()
     
-        tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
+        tableView.rx.itemSelected.throttle(1, scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] indexPath in
             let cell = self?.tableView.cellForRow(at: indexPath) as! CustomCell
             let infoView = DataViewPopUp(section: (self?.segmentedControl.selectedSegmentIndex)!, model: cell.model!)
             infoView.navdelgate = self

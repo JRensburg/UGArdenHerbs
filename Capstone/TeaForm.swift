@@ -43,14 +43,31 @@ class TeaForm: FormViewController, FormUtils {
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
-            <<< TextRow("Lot Number"){
-                $0.title = "Lot Number"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
+        form +++ MultivaluedSection(multivaluedOptions: [.Insert,.Reorder,.Delete], header: "Lot Numbers",footer: ""){
+            $0.tag = "Lot Number"
+            $0.addButtonProvider = { section in
+                return ButtonRow(){
+                    $0.title = "Add New Lot Number"
+                }
+            }
+            $0.multivaluedRowToInsertAt = { index in
+                return TextRow(){//"Lot_\(index+1)") {
+                    $0.placeholder = "Lot Number"
+                }
+            }
+            $0 <<< TextRow(){
+                $0.placeholder = "Lot Number"
+            }
         }
+//            <<< TextRow("Lot Number"){
+//                $0.title = "Lot Number"
+//                }.cellUpdate{ cell, row in
+//                    cell.height = {return 70}
+//        }
+        
         form +++ Section("Submit")
             <<< ButtonRow("Submit"){
-                $0.title = "Post!"
+                $0.title = "Submit!"
                 $0.onCellSelection(self.buttonTapped)
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}

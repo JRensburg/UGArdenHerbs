@@ -38,7 +38,11 @@ extension FormUtils where Self: FormViewController{
                 if(value is Date){
                     let val = dateFormatta.string(from: value as! Date)
                     literalDict[item.key] = val
-                } else {
+                }
+                else if (value is [String?]){
+                    literalDict[item.key] = (value as! [String]).joined(separator: ",")
+                }
+                else {
                     literalDict[item.key] = value
                 }
             }
@@ -95,6 +99,10 @@ extension FormUtils where Self: FormViewController{
     func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) -> Void {
         print("tapped!")
         if row.tag == "Submit"{
+            if let values = (cell.formViewController()?.form.sectionBy(tag: "Lot Numbers") as? MultivaluedSection)?.values() {
+                print(values)
+            }
+//            print(collectValues(values: ((cell.formViewController()?.form.values())!)))
             sendPost(dict: collectValues(values: (cell.formViewController()?.form.values())!))
         }
         else {

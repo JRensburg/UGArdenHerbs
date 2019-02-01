@@ -118,7 +118,7 @@ struct SeedingData : Codable {
     var dateStarted : String
     var dateGerminated : String
     var totalSeeds : Int
-    var percentageGerminated : Double
+    var percentageGerminated : Double?
     var plantName : String
     var datePlanted : String
     
