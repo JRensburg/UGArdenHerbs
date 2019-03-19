@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "78897BC1AE1208DCDFAC10303BC81345"
+               BlueprintIdentifier = "7A6629ED090A730E5F3C0D206282255A"
                BlueprintName = "SuggestionRow"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "SuggestionRow.framework">

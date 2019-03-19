@@ -20,7 +20,7 @@ target 'UGArden Herbs' do
     
   # Utils
   pod 'Alamofire'
-  pod 'QRCode'  
+  
 end
 
 

@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.8.0)
-  - Differentiator (3.1.0)
   - Eureka (4.3.1)
   - QRCode (2.0)
   - RxAlamofire (4.3.0):
@@ -11,16 +10,11 @@ PODS:
   - RxAtomic (4.4.0)
   - RxCocoa (4.4.0):
     - RxSwift (~> 4.0)
-  - RxDataSources (3.1.0):
-    - Differentiator (~> 3.0)
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
   - SnapKit (4.2.0)
   - SuggestionRow (2.2.0):
     - Eureka (~> 4.0)
-  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Alamofire
@@ -28,41 +22,33 @@ DEPENDENCIES:
   - QRCode
   - RxAlamofire
   - RxCocoa
-  - RxDataSources
   - RxSwift
   - SnapKit
   - SuggestionRow
-  - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - Differentiator
     - Eureka
     - QRCode
     - RxAlamofire
     - RxAtomic
     - RxCocoa
-    - RxDataSources
     - RxSwift
     - SnapKit
     - SuggestionRow
-    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
-  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Eureka: 28ea296f06710f6745266b71f17862048941a32d
   QRCode: f98a1886c8f37523704a7512a4c0cd45b34c18a4
   RxAlamofire: 09624d0f2d48ed8b686e4eb4cf68e28cbd2df556
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
-  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SuggestionRow: 694a6ed2fae513b4234bda76126eaffb287a732e
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 357680bef0eb7ba61fc1a647b5c882848527f824
+PODFILE CHECKSUM: d65ca50748bb6a98739babc61fbfc4c126189702
 
 COCOAPODS: 1.5.2
