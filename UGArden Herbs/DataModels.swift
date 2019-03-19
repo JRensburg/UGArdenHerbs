@@ -14,7 +14,8 @@ import RxCocoa
 import SnapKit
 import SuggestionRow
 
-//This is the magical part that lets me return any of the three streams (in ViewData.swift) as simply a stream of dataModel
+//This is sort of a blanket Decodable struct. By using this pattern I can sort of throw it at any of the requests for data
+//that I make and it should decode appropriately provided there is enough information
 struct AnyFormModel: Decodable {
     init(index: Int){
         value = 1
@@ -166,11 +167,6 @@ struct TeaData : Codable {
         self.teaBlend = try container.decode(String.self, forKey: .teaBlend)
     }
 }
-
-
-
-
-
 
 //Pulls data with the given data and decodes it into my custom data types.
 public class APIClient<T:Decodable> {

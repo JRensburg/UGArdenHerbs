@@ -10,9 +10,6 @@ import Foundation
 import Alamofire
 import Eureka
 
-
-//new key  - keyhr7xMO6nFfKreF
-
 protocol FormUtils {
     //var sendUrl : String {get set}
     var postUrl : String {get set}

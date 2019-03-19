@@ -21,7 +21,6 @@ class TeaForm: FormViewController, FormUtils {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "logo"))
         imageView.contentMode = .scaleToFill
         self.navigationItem.title = "Tea Form"
-        //self.navigationItem.titleView
         configureForm()
     }
     
@@ -51,7 +50,7 @@ class TeaForm: FormViewController, FormUtils {
                 }
             }
             $0.multivaluedRowToInsertAt = { index in
-                return TextRow(){//"Lot_\(index+1)") {
+                return TextRow(){
                     $0.placeholder = "Lot Number"
                 }
             }
@@ -59,12 +58,6 @@ class TeaForm: FormViewController, FormUtils {
                 $0.placeholder = "Lot Number"
             }
         }
-//            <<< TextRow("Lot Number"){
-//                $0.title = "Lot Number"
-//                }.cellUpdate{ cell, row in
-//                    cell.height = {return 70}
-//        }
-        
         form +++ Section("Submit")
             <<< ButtonRow("Submit"){
                 $0.title = "Submit!"

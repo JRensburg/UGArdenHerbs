@@ -239,24 +239,6 @@ class DataViewForm: FormViewController, FormUtils {
                 }.cellUpdate{cell, row in
                     cell.height = {return 70}
             }
-//        form +++ MultivaluedSection(multivaluedOptions: [.Insert,.Reorder,.Delete], header: "Lot Numbers",footer: ""){
-//            $0.tag = "Lot Number"
-//            $0.addButtonProvider = { section in
-//                return ButtonRow(){
-//                    $0.title = "Add New Lot Number"
-//                }
-//            }
-//            $0.multivaluedRowToInsertAt = { index in
-//                return TextRow(){//"Lot_\(index+1)") {
-//                    $0.placeholder = "Lot Number"
-//                }
-//            }
-//        }
-//            <<< TextRow("Lot Number"){
-//                $0.title = "Lot Number"
-//                }.cellUpdate{ cell, row in
-//                    cell.height = {return 70}
-//        }
     }
     func configureForm() {
         //TODO Implement

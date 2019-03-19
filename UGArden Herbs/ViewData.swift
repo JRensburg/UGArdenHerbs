@@ -18,8 +18,7 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
     private let tableView = UITableView()
     private let label = UILabel()
     let reload = PublishSubject<Any>.init()
-    let imABadProgrammer = BehaviorSubject<String>(value: "oof")
-    //&sort%5B0%5D%5Bfield%5D=Date+Started&sort%5B0%5D%5Bdirection%5D=desc
+    let refreshObservable = BehaviorSubject<Void>(value: ())
     let segmentContainer = UIView()
     let tabs = UIView()
     let urls = [AirtableURls.seedViewData,AirtableURls.dryingViewData,AirtableURls.teaViewData]
@@ -52,7 +51,7 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
         segment = segmentedControl.rx.selectedSegmentIndex
         super.init(coder: aDecoder)
         segmentedControl.selectedSegmentIndex = 1
-        imABadProgrammer.onNext("b")
+        refreshObservable.onNext(())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,8 +61,9 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
     //This is where the tableview is bound to the data
     private func configureProperties(){
         tableView.register(CustomCell.self, forCellReuseIdentifier: "dryingCell")
-        let models = Observable.combineLatest(self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))), segment, imABadProgrammer){_ , index, hmm in
-                print(hmm)
+        //This emits when the ViewWillAppear,when a segment is selected,and when the RefreshObservable emits.
+        //
+        let models = Observable.combineLatest(self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))), segment, refreshObservable){_ , index, _  in
                 return self.urls[index]
             }.flatMapLatest({self.apiClient.pull(url: $0)})
         models.flatMapLatest({data -> Observable<[dataModel]> in
@@ -79,7 +79,6 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
     //Mostly used to set up the segmented control to be friendly with the tableview
     private func configureLayout(){
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        //tableView.rowHeight = 45.0
         segmentContainer.translatesAutoresizingMaskIntoConstraints = false
         segmentContainer.layer.zPosition = 10
         tabs.translatesAutoresizingMaskIntoConstraints = false
@@ -140,13 +139,6 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
         })
     }
     func refresh() {
-        imABadProgrammer.onNext("delete Done")
+        refreshObservable.onNext(())
     }
 }
-
-
-//            let infoView = DataViewPopUp(section: (self?.segmentedControl!.selectedSegmentIndex)!, model: cell.model!)
-//            self?.view.addSubview(infoView)
-//            infoView.center = (self?.view.center)!e
-//            self!.flipSubViews()
-//            infoView.rx.deallocated.subscribe{self?.flipSubViews()}.disposed(by: self!.disposeBag)

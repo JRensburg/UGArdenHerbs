@@ -24,9 +24,7 @@ class IntroView: UITableViewController{
         imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: (self.navigationController?.navigationBar.frame.size.height)!)
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
-        
     }
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionNames.count
@@ -37,7 +35,6 @@ class IntroView: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IntroCell
         let attribtues: [NSAttributedStringKey: Any] = [NSAttributedStringKey.foregroundColor:UIColor.white, NSAttributedStringKey.font: UIFont(name: "Muli-Light", size: 58)!]
         let title = NSAttributedString(string: sectionNames[indexPath.row].0, attributes: attribtues)

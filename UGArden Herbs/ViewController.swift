@@ -25,7 +25,6 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
 
     var formatter : DateFormatter?
     var postUrl = AirtableURls.dryingURl
-    //var qrData = "" Pretty sure this isnt needed
     let submit = UIButton()
     
     override func viewDidLoad() {

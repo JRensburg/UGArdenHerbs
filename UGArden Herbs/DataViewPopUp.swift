@@ -32,20 +32,24 @@ class DataViewPopUp : UIView, UITableViewDelegate {
         super.init(frame: CGRect(x: 0, y: 0, width: screen.width / 1.25, height: screen.height / 1.5))
         configureButtons()
         layer.cornerRadius = 10
-        layer.shadowColor = UIColor.darkGray.cgColor//black.cgColor
+        layer.shadowColor = UIColor.darkGray.cgColor
         
         tableView.rx.setDelegate(self).disposed(by: dispose)
         backgroundColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1)
         tableView.allowsSelection = false
         configureCells(section: section)
         layer.borderWidth = 1
-        layer.borderColor = UIColor.darkGray.cgColor//black.cgColor
+        layer.borderColor = UIColor.darkGray.cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
   
+    /**
+     This function adds the edit and delete buttons to the view and also adds their handlers
+     It also creates the constraints for both
+    */
     func configureButtons(){
         
         addSubview(remove)
@@ -60,7 +64,6 @@ class DataViewPopUp : UIView, UITableViewDelegate {
         addSubview(update)
         addSubview(delete)
         delete.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
-        //delete.setTitle("Delete Record", for: .normal)
         delete.setImage(UIImage(named: "bettererTrash.png"), for: .normal)
         delete.snp.makeConstraints{
             $0.top.equalToSuperview()
@@ -81,6 +84,9 @@ class DataViewPopUp : UIView, UITableViewDelegate {
         tableView.backgroundView = nil
     }
     
+    /**
+     This function adds the tableView to the superview and also binds the dictionary of data to the tableView
+     */
     func configureCells(section: Int){
         tableView.register(DisplayFieldCell.self, forCellReuseIdentifier: "dryCell")
         addSubview(tableView)
@@ -90,7 +96,7 @@ class DataViewPopUp : UIView, UITableViewDelegate {
             $0.height.equalToSuperview().multipliedBy(0.85) //was .78
             $0.centerX.equalToSuperview()
         }
-        //tableView.rowHeight = 30.0
+        
         tableView.layer.borderWidth = 1
         switch section {
         case 0:
@@ -121,15 +127,7 @@ class DataViewPopUp : UIView, UITableViewDelegate {
     @objc func buttonTapped() -> Void {
         self.removeFromSuperview()
     }
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//       let action = UITableViewRowAction(style: .normal, title: "Submit This Row", handler: {_,_ in })
-//        action.backgroundColor = UIColor(red: 208/255, green: 194/255, blue: 212/255, alpha: 1.0)
-//        return [action]
-//    }
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-//        return UITableViewCellEditingStyle.delete
-//    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40.0
     }
@@ -166,24 +164,10 @@ class DataViewPopUp : UIView, UITableViewDelegate {
             self.navdelgate?.refresh()
         }
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touch: UITouch? = touches.first
-//        if touch?.view == self {
-//            backgroundColor = .red
-//        }
-//
-//    }
 }
-
+/**
+ The class above is a UIView and thus has no access to the navigation controller. To get around this and push the edit form onto the screen, the class that presents this view also conforms to this protocol. This way, the UIView can still present ViewControllers with the information it contains. 
+ */
 protocol navDelegate {
     func navigate(viewController: DataViewForm)
     func presentAlert(alert: UIAlertController)
