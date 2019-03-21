@@ -23,7 +23,6 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
     let tabs = UIView()
     let urls = [AirtableURls.seedViewData,AirtableURls.dryingViewData,AirtableURls.teaViewData]
     private let disposeBag = DisposeBag()
-    private let apiClient = APIClient<dataModel>()
     let segment : ControlProperty<Int>
     let segmentedControl : UISegmentedControl
     
@@ -35,7 +34,7 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
         tableView.rx.itemSelected.throttle(1, scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] indexPath in
             let cell = self?.tableView.cellForRow(at: indexPath) as! CustomCell
             if let dataModel = cell.model {
-                let infoView = DataViewPopUp(section: (self?.segmentedControl.selectedSegmentIndex)!, model: dataModel)
+                let infoView = DataViewPopUp(model: dataModel)
                 infoView.navdelgate = self
                 self?.view.addSubview(infoView)
                 infoView.center = (self?.view.center)!
@@ -51,7 +50,7 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
         segment = segmentedControl.rx.selectedSegmentIndex
         super.init(coder: aDecoder)
         segmentedControl.selectedSegmentIndex = 1
-        refreshObservable.onNext(())
+        refreshObservable.onNext(()) //Have to manually emit at the start.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,17 +61,18 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
     private func configureProperties(){
         tableView.register(CustomCell.self, forCellReuseIdentifier: "dryingCell")
         //This emits when the ViewWillAppear,when a segment is selected,and when the RefreshObservable emits.
-        //
         let models = Observable.combineLatest(self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))), segment, refreshObservable){_ , index, _  in
                 return self.urls[index]
-            }.flatMapLatest({self.apiClient.pull(url: $0)})
+            }.flatMapLatest({APIClient.pull(url: $0)})
+        //Models is now a stream of dataModels
         models.flatMapLatest({data -> Observable<[dataModel]> in
+            //This creates a stream with a blank header inserted at index 0
             var model = data
             model.insert(dataModel(id: "Header", createdTime: "Now", fields: AnyFormModel(index: self.segmentedControl.selectedSegmentIndex)), at: 0)
             return Observable.just(model)
         }).bind(to: tableView.rx.items(cellIdentifier: "dryingCell", cellType: CustomCell.self )){ index, model, cell in
             //Configures the cell according to which data it is given
-            cell.layoutCell(model: model, segmentIndex:    self.segmentedControl.selectedSegmentIndex)
+            cell.layoutCell(model: model)
             }.disposed(by: disposeBag)
     }
 
@@ -134,9 +134,7 @@ class ViewData: UIViewController, navDelegate, UITableViewDelegate{
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     func presentAlert(alert: UIAlertController) {
-        self.present(alert, animated: true, completion: {
-            print("This shouldn't happen")
-        })
+        self.present(alert, animated: true, completion: nil)
     }
     func refresh() {
         refreshObservable.onNext(())

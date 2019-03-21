@@ -15,7 +15,6 @@ class DataViewPopUp : UIView, UITableViewDelegate {
 
     private let tableView = UITableView()
     let dispose = DisposeBag()
-    let switchInt: Int
     let model: dataModel
     var navdelgate: navDelegate? = nil
     var modelDict = [String:Any]()
@@ -23,12 +22,10 @@ class DataViewPopUp : UIView, UITableViewDelegate {
     let update = UIButton()
     let delete = UIButton()
     let remove = UIButton()
-    let urls = [AirtableURls.seedingBase,AirtableURls.dryingBase,AirtableURls.teaBase]
     
-    init(section: Int, model: dataModel){
+    init(model: dataModel){
         let screen = UIScreen.main.bounds
         self.model = model
-        switchInt = section
         super.init(frame: CGRect(x: 0, y: 0, width: screen.width / 1.25, height: screen.height / 1.5))
         configureButtons()
         layer.cornerRadius = 10
@@ -37,7 +34,7 @@ class DataViewPopUp : UIView, UITableViewDelegate {
         tableView.rx.setDelegate(self).disposed(by: dispose)
         backgroundColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1)
         tableView.allowsSelection = false
-        configureCells(section: section)
+        configureCells()
         layer.borderWidth = 1
         layer.borderColor = UIColor.darkGray.cgColor
     }
@@ -87,7 +84,7 @@ class DataViewPopUp : UIView, UITableViewDelegate {
     /**
      This function adds the tableView to the superview and also binds the dictionary of data to the tableView
      */
-    func configureCells(section: Int){
+    func configureCells(){
         tableView.register(DisplayFieldCell.self, forCellReuseIdentifier: "dryCell")
         addSubview(tableView)
         tableView.snp.makeConstraints{
@@ -98,21 +95,8 @@ class DataViewPopUp : UIView, UITableViewDelegate {
         }
         
         tableView.layer.borderWidth = 1
-        switch section {
-        case 0:
-            let data = model.fields.value as! SeedingData
-            modelDict = data.dictionary
-        case 1:
-            // Case 1 means that segmented control was "Drying"
-            let data = model.fields.value as! DryingData
-            modelDict = data.dictionary
-        case 2:
-            let data = model.fields.value as! TeaData
-            modelDict = data.dictionary
-        default:
-            //self.model = nil
-            backgroundColor = .orange
-        }
+        
+        modelDict = model.fields.value.dictionary
         
         Observable.from(optional: values).bind(to: tableView.rx.items(cellIdentifier: "dryCell", cellType: DisplayFieldCell.self)){index, element, cell in
             cell.key.text = element.key
@@ -133,20 +117,20 @@ class DataViewPopUp : UIView, UITableViewDelegate {
     }
     
     @objc func editTapped() -> Void {
-        let formView = DataViewForm(style: .grouped, model: self.model, section: self.switchInt)
+        let formView = DataViewForm(style: .grouped, model: model)
         navdelgate?.navigate(viewController: formView)
     }
     
     @objc func deleteTapped() -> Void {
         var delUrls : String?
-        if ((model.fields.value as? SeedingData) != nil) {
-            delUrls = urls[0]+model.id
+        if (model.fields.value is SeedingData) {
+            delUrls = AirtableURls.seedingBase+model.id
         }
-        else if ((model.fields.value as? DryingData) != nil) {
-            delUrls = urls[1]+model.id
+        else if (model.fields.value is DryingData) {
+            delUrls = AirtableURls.dryingBase+model.id
         }
-        else if ((model.fields.value as? TeaData) != nil) {
-            delUrls = urls[2]+model.id
+        else if (model.fields.value is TeaData) {
+            delUrls = AirtableURls.teaBase+model.id
         }
         delUrls?.append("?" + AirtableURls.authentication)
         let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this entry?", preferredStyle: .alert)

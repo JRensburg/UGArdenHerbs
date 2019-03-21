@@ -10,7 +10,6 @@ import UIKit
 import Eureka
 import SnapKit
 import Alamofire
-import RxAlamofire
 import QRCode
 import AVFoundation
 import SuggestionRow
@@ -18,17 +17,20 @@ import SuggestionRow
 /*
  For reference: label may need to be around 2.4 inches to whatever length 
 */
-class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutputObjectsDelegate, PrintUtils{
+class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutputObjectsDelegate, PrintUtils,Dryable{
 
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-
     var formatter : DateFormatter?
     var postUrl = AirtableURls.dryingURl
     let submit = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        formatter = DateFormatter()
+        formatter?.timeStyle = .none
+        formatter?.dateStyle = .medium
+        formatter?.locale = Locale.current
         self.navigationItem.title = "Drying Form"
         configureForm()
         // Do any additional setup after loading the view, typically from a nib.
@@ -40,45 +42,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
     }
 
     func configureForm(){
-        form +++ Section("Pre-Production")
-            <<< SuggestionAccessoryRow<String>("Crop"){
-                $0.title = "Crop Name"
-                $0.filterFunction = { text in
-                    options.filter({$0.hasPrefix(text)})
-                    }
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< DateRow("Harvest Date"){ row in
-                row.title = "Harvest Date"
-                row.value = Date()
-                formatter = row.dateFormatter
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Plot and Row"){
-                $0.title = "Plot and Row"
-                }.cellUpdate{cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Feet Harvested"){
-                $0.title = "Feet harvested"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< SuggestionAccessoryRow<String>("Plant Part"){
-                $0.title = "Plant Part"
-                $0.filterFunction = { text in
-                    parts.filter({$0.hasPrefix(text)})
-                }
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< DecimalRow("Harvest Weight"){
-                $0.title = "Harvest Weight"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-        }
+        configureFirstHalf()
         form +++ Section("QR Code")
             <<< ButtonRow(){
                 $0.title = "Generate Label"
@@ -92,47 +56,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
         }
-        form +++ Section("Post-Production")
-            <<< ActionSheetRow<String>("Drying Condition") {
-                $0.title = "Drying Condtition"
-                $0.selectorTitle = "Pick which drier was used"
-                $0.options = ["Industrial Drier","Outside Drier","Air Dry","Dry Room"]
-                $0.value = "Dry Room"   // initially selected
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Temperature"){
-                $0.title = "Drying Temperature"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Relative Humidity"){
-                $0.title = "Relative Humidity"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< DateRow("Date Dried"){
-                $0.title = "Date Dried"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Dry Weight"){
-                 $0.title = "Dry Weight"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Processed Weight"){
-                 $0.title = "Processed Weight"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Lot Number"){
-                 $0.title = "Lot Number"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-        }
-        form +++ Section("Miscellaneous")
-            <<< TextAreaRow("Notes")
+        configureSecondHalf()
         form +++ Section("Submit")
             <<< ButtonRow("Submit"){
                 $0.title = "Post!"

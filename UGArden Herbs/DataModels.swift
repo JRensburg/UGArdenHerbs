@@ -17,8 +17,9 @@ import SuggestionRow
 //This is sort of a blanket Decodable struct. By using this pattern I can sort of throw it at any of the requests for data
 //that I make and it should decode appropriately provided there is enough information
 struct AnyFormModel: Decodable {
+    var value: DataType
     init(index: Int){
-        value = 1
+        value = BlankItem(index: index)
     }
     init(from decoder: Decoder) throws {
         if let data = try? SeedingData(from: decoder){
@@ -33,9 +34,8 @@ struct AnyFormModel: Decodable {
             value = data
             return
         }
-        value = ""
+        value = BlankItem()
     }
-    var value: Any
 }
 
 /*
@@ -168,24 +168,38 @@ struct TeaData : Codable {
     }
 }
 
-
-
-
-
+struct BlankItem : DataType {
+    func asEditItem() -> EditItem {
+        return EditItem(baseURL: "",title:"",dict: ["":""])
+    }
+    
+    var index : Int
+    func asCellItem() -> CellItem {
+        switch index {
+        case 0:
+            return CellItem(data:self,titleColumn: "Plant Name",middleColumn: "Started",rightColumn: "Date Dried")
+        case 1:
+            return CellItem(data:self,titleColumn: "Crop Name",middleColumn: "Harvested",rightColumn:"Date Dried")
+        case 2:
+            return CellItem(data:self,titleColumn: "Tea Blend",middleColumn: "Date",rightColumn:"Batch")
+        default:
+            return CellItem(data: self, titleColumn: "", middleColumn: "",rightColumn: "")
+        }
+    }
+    init(index: Int? = 1){
+        self.index = index!
+    }
+}
 
 //Pulls data with the given data and decodes it into my custom data types.
-public class APIClient<T:Decodable> {
-    
-    func pull(url: String) -> Observable<[dataModel]> {
+public class APIClient {
+    static func pull(url: String) -> Observable<[dataModel]> {
+        request(.get, url).responseJSON().subscribe{print($0)}.disposed(by: DisposeBag())
         return request(.get, url).responseData()
-            .map({ (Element) in
-                do{
-                        let  root = try JSONDecoder().decode(Root.self, from: Element.1)
-                        return root.records
-                }
-                catch {
-                    fatalError()
-                }
+            .map({(Element) in
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(Root.self, from: Element.1)
+                return response.records
             })
     }
 }
@@ -219,6 +233,6 @@ extension KeyedDecodingContainer {
 //Lets me check whether the cells should be red. Returns false if any of the fields have one of the default values (-1 or "No Value")
 extension AnyFormModel{
     func isComplete() -> Bool {
-        return ((self.value as! Encodable).dictionary.filter{return ($0.value as? String == "No value" || $0.value as? Int == -1)}.count > 0)
+        return (value.dictionary.filter{return ($0.value as? String == "No value" || $0.value as? Int == -1)}.count > 0)
     }
 }

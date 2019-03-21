@@ -9,12 +9,11 @@
 import Foundation
 import Alamofire
 import Eureka
+import SuggestionRow
 
 protocol FormUtils {
     //var sendUrl : String {get set}
     var postUrl : String {get set}
-    
-    
     func collectValues(values: [String:Any?]) -> [String:Any]
     func sendPost(dict : [String:Any])
     func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) -> Void
@@ -104,6 +103,180 @@ extension FormUtils where Self: FormViewController{
             configureForm()
         }
     }
-
+}
+protocol Seedable {
+    
+}
+extension Seedable where Self:FormViewController {
+    func configureSeedForm() {
+        form +++ Section("Seeding Form")
+            <<< SuggestionAccessoryRow<String>("Plant Name"){
+                $0.title = "Crop Name"
+                $0.filterFunction = { text in
+                    options.filter({$0.hasPrefix(text)})
+                }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< DateRow("Date Started"){
+                $0.title = "Date Started (Seed or Cutting)"
+                $0.value = Date()
+                }.cellUpdate{ cell,row in
+                    cell.height = {return 70}
+            }
+            <<< IntRow("Total # of Seeds"){
+                $0.title = "Number of seeds planted/cuttings"
+                }.cellUpdate{ cell,row in
+                    cell.height = {return 70}
+            }
+            <<< DateRow("Date of Germination"){
+                $0.title = "Date of First Germination"
+                }.cellUpdate{ cell,row in
+                    cell.height = {return 70}
+            }
+            <<< IntRow("Total Number Germinated"){
+                $0.title = "Total Number Germinated"
+                }.cellUpdate{ cell,row in
+                    cell.height = {return 70}
+            }
+            <<< TextAreaRow("Notes"){
+                $0.title = "Notes"
+                $0.placeholder = "Notes for any seed treatment"
+                }.cellUpdate{ cell,row in
+                    cell.height = {return 70}
+            }
+            <<< DateRow("Date Planted"){
+                $0.title = "Date Planted"
+                }.cellUpdate{cell, row in
+                    cell.height = {return 70}
+        }
+    }
+}
+protocol Dryable {
+    
+}
+extension Dryable where Self:FormViewController {
+    func configureFirstHalf(){
+        form +++ Section("Pre-Production")
+            <<< SuggestionAccessoryRow<String>("Crop"){
+                $0.title = "Crop Name"
+                $0.filterFunction = { text in
+                    options.filter({$0.hasPrefix(text)})
+                }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< DateRow("Harvest Date"){ row in
+                row.title = "Harvest Date"
+                row.value = Date()
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< TextRow("Plot and Row"){
+                $0.title = "Plot and Row"
+                }.cellUpdate{cell, row in
+                    cell.height = {return 70}
+            }
+            <<< IntRow("Feet Harvested"){
+                $0.title = "Feet harvested"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< SuggestionAccessoryRow<String>("Plant Part"){
+                $0.title = "Plant Part"
+                $0.filterFunction = { text in
+                    parts.filter({$0.hasPrefix(text)})
+                }
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< DecimalRow("Harvest Weight"){
+                $0.title = "Harvest Weight"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+        }
+    }
+    func configureSecondHalf(){
+        form +++ Section("Post-Production")
+            <<< ActionSheetRow<String>("Drying Condition") {
+                $0.title = "Drying Condtition"
+                $0.selectorTitle = "Pick which drier was used"
+                $0.options = ["Industrial Drier","Outside Drier","Air Dry","Dry Room"]
+                $0.value = "Dry Room"   // initially selected
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< IntRow("Temperature"){
+                $0.title = "Drying Temperature"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< IntRow("Relative Humidity"){
+                $0.title = "Relative Humidity"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< DateRow("Date Dried"){
+                $0.title = "Date Dried"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< IntRow("Dry Weight"){
+                $0.title = "Dry Weight"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< IntRow("Processed Weight"){
+                $0.title = "Processed Weight"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< TextRow("Lot Number"){
+                $0.title = "Lot Number"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+        }
+        form +++ Section("Miscellaneous")
+            <<< TextAreaRow("Notes")
+    }
+}
+protocol TeaAble {
+}
+extension TeaAble where Self:FormViewController {
+    func configureTeaForm(){
+        form +++ Section("Tea Production")
+            <<< DateRow("Date"){
+                $0.title = "Date"
+                $0.value = Date()
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< TextRow("Tea Blend"){
+                $0.title = "Tea Blend"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+            }
+            <<< TextRow("Batch Number"){
+                $0.title = "Batch Number"
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+        }
+        form +++ MultivaluedSection(multivaluedOptions: [.Insert,.Reorder,.Delete], header: "Lot Numbers",footer: ""){
+            $0.tag = "Lot Number"
+            $0.addButtonProvider = { section in
+                return ButtonRow(){
+                    $0.title = "Add New Lot Number"
+                }
+            }
+            $0.multivaluedRowToInsertAt = { index in
+                return TextRow(){
+                    $0.placeholder = "Lot Number"
+                }
+            }
+            $0 <<< TextRow(){
+                $0.placeholder = "Lot Number"
+            }
+        }
+    }
 }
 

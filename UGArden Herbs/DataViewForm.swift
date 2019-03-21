@@ -11,22 +11,19 @@ import Eureka
 import Alamofire
 import SuggestionRow
 
-class DataViewForm: FormViewController, FormUtils {
+class DataViewForm: FormViewController, FormUtils,Seedable, Dryable, TeaAble {
 
     var sendUrl : String
     var authentication = AirtableURls.authentication
     var postUrl: String
     var id: String?
-    
     var APIformatter : DateFormatter
-    let section:Int // tells me which model to use (seeding/drying/tea)
     let model: dataModel
     
-    init(style: UITableView.Style, model: dataModel, section: Int) {
+    init(style: UITableView.Style, model: dataModel) {
         sendUrl = "non-nil value"
         postUrl = "non-nil value"
         APIformatter = DateFormatter()
-        self.section = section
         self.model = model
         super.init(style: style)
         APIformatter.dateFormat = "yyyy-MM-dd"
@@ -40,26 +37,11 @@ class DataViewForm: FormViewController, FormUtils {
         super.viewDidLoad()
         var dict : [String: Any]?
         id = model.id
-        switch section {
-        case 0:
-            sendUrl = AirtableURls.seedingBase
-            self.navigationItem.title = "Edit - Seeding Form"
-            dict = (model.fields.value as! SeedingData).dictionary2
-            configureSeedForm()
-        case 1:
-            sendUrl = AirtableURls.dryingBase
-            self.navigationItem.title = "Edit - Drying Form"
-            dict = (model.fields.value as! DryingData).dictionary2
-            configureHerbForm()
-        case 2:
-            sendUrl = AirtableURls.teaBase
-            self.navigationItem.title = "Edit - Tea Form"
-            dict = (model.fields.value as! TeaData).dictionary2
-            configureTeaForm()
-        default:
-            print("This shouldn't have happened")
-        }
-        
+        let viewItem = model.fields.value.asEditItem()
+        sendUrl = viewItem.baseURL
+        dict = viewItem.dict
+        self.navigationItem.title = viewItem.title
+        configureForm()
         form +++ Section("Submit Changes")
             <<< ButtonRow("Submit"){
                 $0.title = "Submit Changes"
@@ -92,158 +74,18 @@ class DataViewForm: FormViewController, FormUtils {
         }
     }
     
-    /*
-    //
-    //      All the various configurations
-    //
-    */
-    func configureSeedForm() {
-        form +++ Section("Seeding Form")
-            <<< TextRow("Plant Name"){
-                $0.title = "Plant"
-                $0.placeholder = "Plant Name"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< DateRow("Date Started"){
-                $0.title = "Date Started (Seed or Cutting)"
-                }.cellUpdate{ cell,row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Total # of Seeds"){
-                $0.title = "Number of seeds planted/cuttings"
-                }.cellUpdate{ cell,row in
-                    cell.height = {return 70}
-            }
-            <<< DateRow("Date of Germination"){
-                $0.title = "Date of First Germination"
-                }.cellUpdate{ cell,row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Total Number Germinated"){
-                $0.title = "Total Number Germinated"
-                }.cellUpdate{ cell,row in
-                    cell.height = {return 70}
-            }
-            <<< TextAreaRow("Notes"){
-                $0.title = "Notes"
-                $0.placeholder = "Notes for any seed treatment"
-                }.cellUpdate{ cell,row in
-                    cell.height = {return 70}
-            }
-            <<< DateRow("Date Planted"){
-                $0.title = "Date Planted"
-                }.cellUpdate{cell, row in
-                    cell.height = {return 70}
-        }
-    }
-    func configureHerbForm() {
-        form +++ Section("Drying Form")
-            <<< SuggestionAccessoryRow<String>("Crop"){
-                //$0.placeholder = "Enter Crop Name"
-                $0.title = "Crop Name"
-                $0.filterFunction = { text in
-                    options.filter({$0.hasPrefix(text)})
-                }
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< DateRow("Harvest Date"){ row in
-                row.title = "Harvest Date"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Plot and Row"){
-                $0.title = "Plot and Row"
-                }.cellUpdate{cell, row in
-                    cell.height = {return 70}
-        }
-            <<< IntRow("Feet Harvested"){
-                $0.title = "Number of Feet harvested"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< SuggestionAccessoryRow<String>("Plant Part"){
-                $0.title = "Plant Part"
-                $0.filterFunction = { text in
-                    parts.filter({$0.hasPrefix(text)})
-                }
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< DecimalRow("Harvest Weight"){
-                $0.title = "Harvest Weight"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-        }
-            <<< ActionSheetRow<String>("Drying Condition") {
-                $0.title = "Drying Condtition"
-                $0.selectorTitle = "Pick which drier was used"
-                $0.options = ["Industrial Drier","Outsdie drier","Air Dry","Dry Room"]
-                $0.value = "Dry Room"   // initially selected
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Temperature"){
-                $0.title = "Drying Temperature"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Relative Humidity"){
-                $0.title = "Relative Humidity"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< DateRow("Date Dried"){
-                $0.title = "Date Dried"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Dry Weight"){
-                $0.title = "Dry Weight"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< IntRow("Processed Weight"){
-                $0.title = "Processed Weight"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Lot Number"){
-                $0.title = "Lot Number"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-        }
-    }
-    
-    func configureTeaForm(){
-        form +++ Section("Tea Production")
-            <<< DateRow("Date"){
-                $0.title = "Date"
-                $0.value = Date()
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Tea Blend"){
-                $0.title = "Tea Blend"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Batch Number"){
-                $0.title = "Batch Number"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Lot Number"){
-                $0.title = "Lot Number"
-                }.cellUpdate{cell, row in
-                    cell.height = {return 70}
-            }
-    }
     func configureForm() {
-        //TODO Implement
+        if (model.fields.value is SeedingData) {
+            configureSeedForm()
+        }
+        else if (model.fields.value is DryingData) {
+            configureFirstHalf()
+            configureSecondHalf()
+        }
+        else if (model.fields.value is TeaData) {
+            configureTeaForm()
+        }
     }
-    
     
     func submitChanges(cell: ButtonCellOf<String>, row: ButtonRow) -> Void {
         sendPatch(dict: collectValues(values: (form.values())))
@@ -280,3 +122,4 @@ class DataViewForm: FormViewController, FormUtils {
         print(almoRequest)
     }
 }
+

@@ -12,7 +12,7 @@ import SnapKit
 import Eureka
 import Alamofire
 
-class TeaForm: FormViewController, FormUtils {
+class TeaForm: FormViewController, FormUtils,TeaAble {
     var postUrl = AirtableURls.teaURl
     
     override func viewDidLoad() {
@@ -25,39 +25,7 @@ class TeaForm: FormViewController, FormUtils {
     }
     
     func configureForm(){
-        form +++ Section("Tea Production")
-            <<< DateRow("Date"){
-                $0.title = "Date"
-                $0.value = Date()
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Tea Blend"){
-                $0.title = "Tea Blend"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-            <<< TextRow("Batch Number"){
-                $0.title = "Batch Number"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-            }
-        form +++ MultivaluedSection(multivaluedOptions: [.Insert,.Reorder,.Delete], header: "Lot Numbers",footer: ""){
-            $0.tag = "Lot Number"
-            $0.addButtonProvider = { section in
-                return ButtonRow(){
-                    $0.title = "Add New Lot Number"
-                }
-            }
-            $0.multivaluedRowToInsertAt = { index in
-                return TextRow(){
-                    $0.placeholder = "Lot Number"
-                }
-            }
-            $0 <<< TextRow(){
-                $0.placeholder = "Lot Number"
-            }
-        }
+        configureTeaForm()
         form +++ Section("Submit")
             <<< ButtonRow("Submit"){
                 $0.title = "Submit!"
