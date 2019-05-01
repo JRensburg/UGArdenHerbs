@@ -59,7 +59,7 @@ struct dataModel: Decodable{
     }
 }
 /*
-//For Data from the drying form. Really long, but this way I can have default values.
+//For Data from the drying form. Really l3ong, but this way I can have default values.
 //(It was more convenient at the time for me to assign default values to the struct itself - the Rx binding to tableview was unhappy with nil or empty values and I hadn't thought of defining a protocol to lay out the cells)
  */
 struct DryingData : Codable {
@@ -69,13 +69,13 @@ struct DryingData : Codable {
     var plotNrow: String
     var feetHarvested: Int
     var plantPart: String
-    var harvestWeight: Int
+    var harvestWeight: Double
     var dryingCondition: String
     var temp: Int
     var humidity: Int
     var dateDried: String
-    var dryWeight: Int
-    var processedWeight: Int
+    var dryWeight: Double
+    var processedWeight: Double
     var lotNumber: String
     
     private enum CodingKeys: String, CodingKey {
@@ -194,7 +194,7 @@ struct BlankItem : DataType {
 //Pulls data with the given data and decodes it into my custom data types.
 public class APIClient {
     static func pull(url: String) -> Observable<[dataModel]> {
-        request(.get, url).responseJSON().subscribe{print($0)}.disposed(by: DisposeBag())
+        //request(.get, url).responseJSON().subscribe{print($0)}//.disposed(by: DisposeBag())
         return request(.get, url).responseData()
             .map({(Element) in
                 let decoder = JSONDecoder()
@@ -206,7 +206,7 @@ public class APIClient {
 
 
 //Not Really Data Models, but used for the suggestion rows
-public let options = ["Hops","Luffa","Passionflower","Blue vervain","Echinacea"," Elecampane","Garden Sage","Goldenrod","Gotu Kola","Lavender (english)","Lemon Balm","Lemon verbena","Mint Licorice","Motherwort","Mugwort","Oregano","Peppermint","Rosemary","Skullcap (official)"," Stevia","Stinging Nettle","Thyme (English)","Violet","Yarrow","Ashwagandha, Vedic","Burdock, gobo", "Calendula, orange","Callifornia Poppy","Chamomile, german", "Cilantro","Dandelion, wild","Hibiscus","Lemongrass","Parsley","Plantain","Red Clover","Temperate Tulsi","Turmeric","Ginger","Blueberry leaves","Comfrey, Russian","Elderberries","Hawthorne","Licorice","Red raspberry","Rose","Ted Rose","Sumac","Yaupon Holly"]
+public let options = ["Ashwagandha","Basil","Blue vervain","Blueberry leaves","Calendula","Chamomile","Comfre","Dandelion","Echinacea","Elderberry","Ginger","Goldenrod","Hawthorne","Hibiscus","Holy basil, Kapoor","Holy basil, Krishna","Holy basil, Vana","Lemon balm","Lemon verbena","Lemongrass","Licorice Mint","Luffa","Marjoram","Motherwort","Oats","Oregano","Parsley","Passionflower","Peppermint","Plantain","Red clover","Red Rose","Rose Hip","Rosemary","Skullcap","Stevia","Stinging nettle","Thyme","Yarrow","Yaupon holly"]
 public let parts = ["Herb","Flowering Tops","Leaf","Flower","Root","Calyx"]
 
 //Convenience Methods that convert my data structs to dictionaries. Used primarily by DataViewPopUp to fill out the forms

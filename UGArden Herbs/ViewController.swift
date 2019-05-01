@@ -102,7 +102,7 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
         
         let otherCode = QRCode(String(data: jsonData!, encoding: .utf8)!)
         
-        let labelView = createView(image: otherCode!.image!, info: literalDict.filter{$0.key == "Crop" || $0.key == "Harvest Date" || $0.key == "Plant Part"})
+        let labelView = createView(image: otherCode!.image!, info: literalDict.filter{$0.key == "Crop" || $0.key == "Harvest Date" || $0.key == "Lot Number"})
 
         printLabel(image: labelView)
     }

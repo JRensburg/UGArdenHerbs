@@ -26,33 +26,23 @@ extension PrintUtils where Self : HerbFormController{
      
      I chose to handle it this way because Views are easier to construct and layout, and turning it into an image was relatively simple.Printing images is pretty simple as well, so this seemed like the best route.
      */
+    //old width: 294
     func createView(image: UIImage, info: [String:Any?]) -> UIImage {
-        let label = UIView(frame: CGRect(x: 0, y: 0, width: 294, height: 150))
+        let label = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 150))
         label.backgroundColor = .white
         let qrView = UIImageView(image: image)
         label.addSubview(qrView)
         qrView.snp.makeConstraints{
             $0.bottom.right.equalToSuperview().inset(10)
-            $0.height.equalToSuperview().dividedBy(1.5)
-            $0.width.equalToSuperview().dividedBy(3)
+            $0.height.equalTo(100)
+            $0.width.equalTo(100)
         }
-        let logo = UIImageView(image: UIImage(named: "logo.png"))
-        label.addSubview(logo)
-        logo.contentMode = .scaleAspectFit
-        logo.snp.makeConstraints{
-            $0.width.equalToSuperview().dividedBy(4)
-            $0.height.equalToSuperview().dividedBy(8)
-            $0.left.top.equalToSuperview().offset(5)
-        }
-        
+
         // FOR LABEL:
         //
         // Include Crop name first (duh)
-        // Then Date harvested
-        // Harvested Weight if (Dry and processed is nil)
-        // Dry weight
-        // Processed Weight
         // Lot #
+        // Then Date harvested
         //
         
         for (index,item) in info.enumerated() {

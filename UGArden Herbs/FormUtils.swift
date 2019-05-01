@@ -21,7 +21,6 @@ protocol FormUtils {
 }
 
 extension FormUtils where Self: FormViewController{
-
     /**
      This function collects and formats certain values like dates into a dictionary.
      The forms must have their tag values set to match what the api expects.
@@ -92,6 +91,7 @@ extension FormUtils where Self: FormViewController{
     
     func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) -> Void {
         print("tapped!")
+        print(form.validate())
         if row.tag == "Submit"{
             if let values = (cell.formViewController()?.form.sectionBy(tag: "Lot Numbers") as? MultivaluedSection)?.values() {
                 print(values)
@@ -115,14 +115,24 @@ extension Seedable where Self:FormViewController {
                 $0.filterFunction = { text in
                     options.filter({$0.hasPrefix(text)})
                 }
+                $0.add(rule: RuleRequired())
+                $0.validationOptions = .validatesOnChange
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
             }
             <<< DateRow("Date Started"){
                 $0.title = "Date Started (Seed or Cutting)"
                 $0.value = Date()
+                $0.add(rule: RuleRequired())
+                $0.validationOptions = .validatesOnChange
                 }.cellUpdate{ cell,row in
                     cell.height = {return 70}
+                    if !row.isValid {
+                        cell.backgroundColor = .red
+                    }
             }
             <<< IntRow("Total # of Seeds"){
                 $0.title = "Number of seeds planted/cuttings"
@@ -163,8 +173,23 @@ extension Dryable where Self:FormViewController {
                 $0.filterFunction = { text in
                     options.filter({$0.hasPrefix(text)})
                 }
+                $0.add(rule: RuleRequired())
+                $0.validationOptions = .validatesOnChange
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
+            }
+            <<< TextRow("Lot Number"){
+                $0.title = "Lot Number"
+                $0.add(rule: RuleRequired())
+                $0.validationOptions = .validatesOnChange
+                }.cellUpdate{ cell, row in
+                    cell.height = {return 70}
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
             }
             <<< DateRow("Harvest Date"){ row in
                 row.title = "Harvest Date"
@@ -221,21 +246,16 @@ extension Dryable where Self:FormViewController {
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
-            <<< IntRow("Dry Weight"){
+            <<< DecimalRow("Dry Weight"){
                 $0.title = "Dry Weight"
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
-            <<< IntRow("Processed Weight"){
+            <<< DecimalRow("Processed Weight"){
                 $0.title = "Processed Weight"
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
-            <<< TextRow("Lot Number"){
-                $0.title = "Lot Number"
-                }.cellUpdate{ cell, row in
-                    cell.height = {return 70}
-        }
         form +++ Section("Miscellaneous")
             <<< TextAreaRow("Notes")
     }
@@ -248,13 +268,20 @@ extension TeaAble where Self:FormViewController {
             <<< DateRow("Date"){
                 $0.title = "Date"
                 $0.value = Date()
+                $0.add(rule: RuleRequired())
+                $0.validationOptions = .validatesOnChange
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
             <<< TextRow("Tea Blend"){
                 $0.title = "Tea Blend"
+                $0.add(rule: RuleRequired())
+                $0.validationOptions = .validatesOnChange
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
             }
             <<< TextRow("Batch Number"){
                 $0.title = "Batch Number"
