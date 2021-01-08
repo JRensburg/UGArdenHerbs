@@ -3,24 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		13410ACE217923920032FC6F /* font in Resources */ = {isa = PBXBuildFile; fileRef = 13410ACD217923920032FC6F /* font */; };
 		1342AA4C21802C4200863649 /* ViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342AA4B21802C4200863649 /* ViewData.swift */; };
 		134A7442213EC54900640347 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134A7441213EC54900640347 /* AppDelegate.swift */; };
-		134A7444213EC54900640347 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134A7443213EC54900640347 /* ViewController.swift */; };
+		134A7444213EC54900640347 /* DryingForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134A7443213EC54900640347 /* DryingForm.swift */; };
 		134A7447213EC54900640347 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134A7445213EC54900640347 /* Main.storyboard */; };
-		134A744A213EC54900640347 /* Capstone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 134A7448213EC54900640347 /* Capstone.xcdatamodeld */; };
 		134A744C213EC55200640347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 134A744B213EC55200640347 /* Assets.xcassets */; };
 		134A744F213EC55200640347 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134A744D213EC55200640347 /* LaunchScreen.storyboard */; };
 		135E7A002194E34F00EB7932 /* DataViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135E79FF2194E34F00EB7932 /* DataViewPopUp.swift */; };
 		1362ADA921E563ED00767DCD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1362ADA821E563ED00767DCD /* SplashViewController.swift */; };
 		136BCBEC21ACAA1B0039BA82 /* DataViewForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */; };
-		1374EB8E2213C7C00029C435 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1374EB8D2213C7C00029C435 /* Constants.swift */; };
 		1396C75621B6133D00A451E2 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1396C75521B6133D00A451E2 /* TableViewCells.swift */; };
-		13A3AD5521515C050067A55D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5421515C050067A55D /* TableViewController.swift */; };
+		13A3AD5521515C050067A55D /* InitialNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5421515C050067A55D /* InitialNavViewController.swift */; };
 		13A3AD57215437820067A55D /* SeedingForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD56215437820067A55D /* SeedingForm.swift */; };
 		13A3AD5921543C8B0067A55D /* TeaForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5821543C8B0067A55D /* TeaForm.swift */; };
 		13A3AD5B215A91270067A55D /* FormUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5A215A91270067A55D /* FormUtils.swift */; };
@@ -28,6 +26,10 @@
 		13A3AD5F216404D80067A55D /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3AD5E216404D80067A55D /* PrintUtils.swift */; };
 		13DC36122241E99800E8045F /* LayoutProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DC36112241E99800E8045F /* LayoutProtocols.swift */; };
 		13E5B6B8219B5DC300585B38 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E5B6B7219B5DC300585B38 /* DataModels.swift */; };
+		15CCF9F225493197005080C5 /* Seedable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CCF9F125493197005080C5 /* Seedable.swift */; };
+		15CCF9F525493218005080C5 /* Dryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CCF9F425493218005080C5 /* Dryable.swift */; };
+		15CCFA03254932B9005080C5 /* TeaAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CCFA02254932B9005080C5 /* TeaAble.swift */; };
+		15F2C2F924BC041E00A75AEC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C2F824BC041E00A75AEC /* Constants.swift */; };
 		24117C6B60BC5C535380ADC5 /* Pods_UGArden_Herbs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038B2C9D84F8607868C8E09C /* Pods_UGArden_Herbs.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,18 +39,16 @@
 		1342AA4B21802C4200863649 /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
 		134A743E213EC54900640347 /* UGArden Herbs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UGArden Herbs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		134A7441213EC54900640347 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		134A7443213EC54900640347 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		134A7443213EC54900640347 /* DryingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DryingForm.swift; sourceTree = "<group>"; };
 		134A7446213EC54900640347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		134A7449213EC54900640347 /* Capstone.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Capstone.xcdatamodel; sourceTree = "<group>"; };
 		134A744B213EC55200640347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		134A744E213EC55200640347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		134A7450213EC55200640347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		135E79FF2194E34F00EB7932 /* DataViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewPopUp.swift; sourceTree = "<group>"; };
 		1362ADA821E563ED00767DCD /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewForm.swift; sourceTree = "<group>"; };
-		1374EB8D2213C7C00029C435 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1396C75521B6133D00A451E2 /* TableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
-		13A3AD5421515C050067A55D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		13A3AD5421515C050067A55D /* InitialNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialNavViewController.swift; sourceTree = "<group>"; };
 		13A3AD56215437820067A55D /* SeedingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedingForm.swift; sourceTree = "<group>"; };
 		13A3AD5821543C8B0067A55D /* TeaForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaForm.swift; sourceTree = "<group>"; };
 		13A3AD5A215A91270067A55D /* FormUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUtils.swift; sourceTree = "<group>"; };
@@ -56,6 +56,10 @@
 		13A3AD5E216404D80067A55D /* PrintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
 		13DC36112241E99800E8045F /* LayoutProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutProtocols.swift; sourceTree = "<group>"; };
 		13E5B6B7219B5DC300585B38 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
+		15CCF9F125493197005080C5 /* Seedable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seedable.swift; sourceTree = "<group>"; };
+		15CCF9F425493218005080C5 /* Dryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dryable.swift; sourceTree = "<group>"; };
+		15CCFA02254932B9005080C5 /* TeaAble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaAble.swift; sourceTree = "<group>"; };
+		15F2C2F824BC041E00A75AEC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9711FAA7B2FEFE2FCA96BA5B /* Pods-UGArden Herbs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UGArden Herbs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs.debug.xcconfig"; sourceTree = "<group>"; };
 		E5918A0AAE7F8758F51568F7 /* Pods-UGArden Herbs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UGArden Herbs.release.xcconfig"; path = "Pods/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,30 +97,80 @@
 		134A7440213EC54900640347 /* UGArden Herbs */ = {
 			isa = PBXGroup;
 			children = (
+				15AB09C425493C39008C3306 /* DataOverview */,
+				15CCFA1D25493777005080C5 /* Startup */,
+				15CCF9F025493183005080C5 /* FormBase */,
+				15AB09C325493C20008C3306 /* FormClasses */,
+				15CCF9E325492959005080C5 /* Models */,
+				15CCF9E225492937005080C5 /* Print+QR */,
 				134A7441213EC54900640347 /* AppDelegate.swift */,
-				134A7443213EC54900640347 /* ViewController.swift */,
-				13A3AD5E216404D80067A55D /* PrintUtils.swift */,
-				13A3AD5C215D5C1B0067A55D /* QRScanner.swift */,
-				13A3AD5A215A91270067A55D /* FormUtils.swift */,
-				1374EB8D2213C7C00029C435 /* Constants.swift */,
-				13A3AD56215437820067A55D /* SeedingForm.swift */,
-				136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */,
-				13A3AD5821543C8B0067A55D /* TeaForm.swift */,
-				13A3AD5421515C050067A55D /* TableViewController.swift */,
-				1342AA4B21802C4200863649 /* ViewData.swift */,
-				13DC36112241E99800E8045F /* LayoutProtocols.swift */,
-				13E5B6B7219B5DC300585B38 /* DataModels.swift */,
-				135E79FF2194E34F00EB7932 /* DataViewPopUp.swift */,
-				1362ADA821E563ED00767DCD /* SplashViewController.swift */,
-				1396C75521B6133D00A451E2 /* TableViewCells.swift */,
 				134A7445213EC54900640347 /* Main.storyboard */,
 				134A744B213EC55200640347 /* Assets.xcassets */,
 				134A744D213EC55200640347 /* LaunchScreen.storyboard */,
 				134A7450213EC55200640347 /* Info.plist */,
-				134A7448213EC54900640347 /* Capstone.xcdatamodeld */,
 				13410ACD217923920032FC6F /* font */,
+				15F2C2F824BC041E00A75AEC /* Constants.swift */,
 			);
 			path = "UGArden Herbs";
+			sourceTree = "<group>";
+		};
+		15AB09C325493C20008C3306 /* FormClasses */ = {
+			isa = PBXGroup;
+			children = (
+				134A7443213EC54900640347 /* DryingForm.swift */,
+				13A3AD56215437820067A55D /* SeedingForm.swift */,
+				13A3AD5821543C8B0067A55D /* TeaForm.swift */,
+			);
+			path = FormClasses;
+			sourceTree = "<group>";
+		};
+		15AB09C425493C39008C3306 /* DataOverview */ = {
+			isa = PBXGroup;
+			children = (
+				1342AA4B21802C4200863649 /* ViewData.swift */,
+				13DC36112241E99800E8045F /* LayoutProtocols.swift */,
+				1396C75521B6133D00A451E2 /* TableViewCells.swift */,
+				136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */,
+				135E79FF2194E34F00EB7932 /* DataViewPopUp.swift */,
+			);
+			path = DataOverview;
+			sourceTree = "<group>";
+		};
+		15CCF9E225492937005080C5 /* Print+QR */ = {
+			isa = PBXGroup;
+			children = (
+				13A3AD5E216404D80067A55D /* PrintUtils.swift */,
+				13A3AD5C215D5C1B0067A55D /* QRScanner.swift */,
+			);
+			path = "Print+QR";
+			sourceTree = "<group>";
+		};
+		15CCF9E325492959005080C5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				13E5B6B7219B5DC300585B38 /* DataModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		15CCF9F025493183005080C5 /* FormBase */ = {
+			isa = PBXGroup;
+			children = (
+				13A3AD5A215A91270067A55D /* FormUtils.swift */,
+				15CCF9F125493197005080C5 /* Seedable.swift */,
+				15CCFA02254932B9005080C5 /* TeaAble.swift */,
+				15CCF9F425493218005080C5 /* Dryable.swift */,
+			);
+			path = FormBase;
+			sourceTree = "<group>";
+		};
+		15CCFA1D25493777005080C5 /* Startup */ = {
+			isa = PBXGroup;
+			children = (
+				1362ADA821E563ED00767DCD /* SplashViewController.swift */,
+				13A3AD5421515C050067A55D /* InitialNavViewController.swift */,
+			);
+			path = Startup;
 			sourceTree = "<group>";
 		};
 		651114DA019AB7304049DA3F /* Pods */ = {
@@ -229,33 +283,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
-				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SuggestionRow/SuggestionRow.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SuggestionRow.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -265,18 +302,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				134A7444213EC54900640347 /* ViewController.swift in Sources */,
-				134A744A213EC54900640347 /* Capstone.xcdatamodeld in Sources */,
+				134A7444213EC54900640347 /* DryingForm.swift in Sources */,
+				15F2C2F924BC041E00A75AEC /* Constants.swift in Sources */,
+				15CCFA03254932B9005080C5 /* TeaAble.swift in Sources */,
+				15CCF9F225493197005080C5 /* Seedable.swift in Sources */,
 				13A3AD5921543C8B0067A55D /* TeaForm.swift in Sources */,
 				13A3AD5B215A91270067A55D /* FormUtils.swift in Sources */,
 				135E7A002194E34F00EB7932 /* DataViewPopUp.swift in Sources */,
 				1342AA4C21802C4200863649 /* ViewData.swift in Sources */,
 				13A3AD57215437820067A55D /* SeedingForm.swift in Sources */,
-				1374EB8E2213C7C00029C435 /* Constants.swift in Sources */,
-				13A3AD5521515C050067A55D /* TableViewController.swift in Sources */,
+				13A3AD5521515C050067A55D /* InitialNavViewController.swift in Sources */,
 				136BCBEC21ACAA1B0039BA82 /* DataViewForm.swift in Sources */,
 				13DC36122241E99800E8045F /* LayoutProtocols.swift in Sources */,
 				1362ADA921E563ED00767DCD /* SplashViewController.swift in Sources */,
+				15CCF9F525493218005080C5 /* Dryable.swift in Sources */,
 				13A3AD5F216404D80067A55D /* PrintUtils.swift in Sources */,
 				13E5B6B8219B5DC300585B38 /* DataModels.swift in Sources */,
 				134A7442213EC54900640347 /* AppDelegate.swift in Sources */,
@@ -485,19 +524,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		134A7448213EC54900640347 /* Capstone.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				134A7449213EC54900640347 /* Capstone.xcdatamodel */,
-			);
-			currentVersion = 134A7449213EC54900640347 /* Capstone.xcdatamodel */;
-			path = Capstone.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 134A7436213EC54900640347 /* Project object */;
 }

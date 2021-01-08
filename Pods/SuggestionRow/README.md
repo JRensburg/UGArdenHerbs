@@ -4,14 +4,21 @@
 </p>
 
 ## Contents
-* [Introduction](#introduction)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Running the examples](#running-the-examples)
-* [Customization](#customization)
-* [Dependencies](#dependencies)
-* [Requirements](#requirements)
-* [Getting involved](#getting-involved)
+- [Contents](#contents)
+- [Introduction](#introduction)
+- [Installation](#installation)
+    - [CocoaPods](#cocoapods)
+    - [Swift Package Manager](#swift-package-manager)
+- [Usage](#usage)
+  - [Conform to `SuggestionValue` protocol](#conform-to-suggestionvalue-protocol)
+  - [Instantiate the row](#instantiate-the-row)
+- [Running the examples](#running-the-examples)
+- [Customization](#customization)
+  - [SuggestionTableRow<T>](#suggestiontablerowt)
+  - [SuggestionAccessoryRow<T>](#suggestionaccessoryrowt)
+- [Dependencies](#dependencies)
+- [Requirements](#requirements)
+- [Getting involved](#getting-involved)
 
 ## Introduction
 `SuggestionRow` is a row extension for the [Eureka](https://github.com/xmartlabs/Eureka) iOS form builder that provides completion suggestions as the user is typing. There are two rows that can be instantiated:
@@ -39,6 +46,16 @@ pod 'SuggestionRow'
 ```
 
 Then run `pod install`.
+
+#### Swift Package Manager
+
+[Swift Package Manager](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code.
+
+After you set up your `Package.swift` manifest file, you can add SuggestionRow as a dependency by adding it to the dependencies value of your `Package.swift`.
+
+dependencies: [
+    .package(url: "https://github.com/EurekaCommunity/SuggestionRow.git", from: "3.2.0")
+]
 
 ## Usage
 ### Conform to `SuggestionValue` protocol
@@ -99,7 +116,36 @@ To run the examples follow these steps:
 
 ## Customization
 
-### `SuggestionAccessoryRow<T>`
+### SuggestionTableRow<T>
+`SuggestionTableRow` uses a generic `SuggestionTableCell` cell whose generic parameter is the `UITableViewCell` class used to create the cells displayed in a `UITableView` with the suggested options.
+
+* If you want to make minor visual changes to the suggestion table row cells, use the `customizeTableViewCell` callback.
+
+* You can customize attributes of the `tableView` that displays the options. You should do this in `cellSetup` and keep in mind that the frame of the tableView is reset each time the tableView is displayed.
+
+* If you want to change these cells drastically, create your own row with your own cell class which conforms to `EurekaSuggestionTableViewCell`. For example like this:
+
+```swift
+final class MySuggestionTableRow<T: SuggestionValue>: _SuggestionRow<MySuggestionTableCell<T, SuggestionTableViewCell<T>>>, RowType {
+    required public init(tag: String?) {
+        super.init(tag: tag)
+    }
+}
+
+class MySuggestionTableCell<T, TableViewCell: UITableViewCell>: SuggestionTableCell<T, TableViewCell> where TableViewCell: EurekaSuggestionTableViewCell, TableViewCell.S == T {
+    // ...
+}
+
+open class MySuggestionTableViewCell<T: SuggestionValue>: SuggestionTableViewCell<T> {
+    // ...
+}
+```
+
+Here `MySuggestionTableCell` is the cell of the row itself and `MySuggestionTableViewCell` is the cell that is used to display the suggestions.
+
+Look at the source code of the default cells for inspiration.
+
+### SuggestionAccessoryRow<T>
 `SuggestionAccessoryRow `uses a generic `SuggestionCollectionCell` cell whose generic parameter is the `UICollectionViewCell` class used in the `inputAccessoryView`.
 
 * If you want to make minor visual changes to the suggestion cells, use the `customizeCollectionViewCell` callback.
@@ -108,24 +154,16 @@ To run the examples follow these steps:
 
 * If you want to change something about the **collectionView** (e.g. its height, backgroundColor) then you can also do that in the `cellSetup` method.
 
-* If you want to **change the collection view cell of the inputAccessoryView** drastically, create your own row (`MySuggestionAccessoryRow`) with your own cell class which conforms to `EurekaSuggestionCollectionViewCell`.
-
-### SuggestionTableRow<T>
-`SuggestionTableRow` uses a generic `SuggestionTableCell` cell whose generic parameter is the `UITableViewCell` class used to create the cells displayed in a `UITableView` with the suggested options.
-
-* If you want to make minor visual changes to the suggestion table row cells, use the `customizeTableViewCell` callback.
-
-* You can customize attributes of the `tableView` that displays the options. You should do this in `cellSetup` and keep in mind that the frame of the tableView is reset each time the tableView is displayed.
-
-* If you want to change these cells drastically, create your own row with your own cell class which conforms to `EurekaSuggestionTableViewCell`.
+* If you want to **change the collection view cell of the inputAccessoryView** drastically, create your own row (`MySuggestionAccessoryRow`) with your own cell class which conforms to `EurekaSuggestionCollectionViewCell`. 
+This is very similar to the example mentioned above for `SuggestionTableRow`.
 
 ## Dependencies
 * Eureka
 
 ## Requirements
-* iOS 8.0+
-* Xcode 8.3+
-* Swift 3
+* iOS 9.3+
+* Xcode 11+
+* Swift 5.0
 
 ## Getting involved
 * If you **want to contribute** please feel free to **submit pull requests**.

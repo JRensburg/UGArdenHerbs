@@ -5,7 +5,7 @@
 //
 //
 
-import Foundation
+import UIKit
 import Eureka
 
 public protocol EurekaSuggestionTableViewCell {
@@ -31,8 +31,13 @@ open class SuggestionTableViewCell<T: SuggestionValue>: UITableViewCell, EurekaS
         textLabel?.font = .systemFont(ofSize: 16)
         textLabel?.minimumScaleFactor = 0.8
         textLabel?.adjustsFontSizeToFitWidth = true
-        textLabel?.textColor = .black
-        contentView.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            textLabel?.textColor = .label
+            contentView.backgroundColor = .systemBackground
+        } else {
+            textLabel?.textColor = .black
+            contentView.backgroundColor = .white
+        }
     }
     
     open func setupForValue(_ value: T) {
