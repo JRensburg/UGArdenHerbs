@@ -1,6 +1,0 @@
-framework module Pods_UGArden_Herbs {
-  umbrella header "Pods-UGArden Herbs-umbrella.h"
-
-  export *
-  module * { export * }
-}

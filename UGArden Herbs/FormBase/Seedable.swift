@@ -6,7 +6,7 @@
 //  Copyright © 2020 NMI. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Eureka
 import SuggestionRow
 

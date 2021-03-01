@@ -6,7 +6,7 @@
 //  Copyright © 2018 NMI. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Eureka
 import Alamofire
 import SuggestionRow

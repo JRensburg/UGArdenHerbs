@@ -39,7 +39,7 @@ class ViewDataViewController: UIViewController, navDelegate, UITableViewDelegate
                 self?.view.addSubview(infoView)
                 infoView.center = (self?.view.center)!
                 self!.flipSubViews()
-                infoView.rx.deallocated.subscribe{self?.flipSubViews()}.disposed(by: self!.disposeBag)
+                infoView.rx.deallocated.subscribe(onDisposed: {self?.flipSubViews()}).disposed(by: self!.disposeBag)
                 self?.tableView.deselectRow(at: indexPath, animated: true)
             }
         }).disposed(by: disposeBag)

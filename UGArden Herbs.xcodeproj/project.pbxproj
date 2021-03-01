@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,12 +30,22 @@
 		15CCF9F525493218005080C5 /* Dryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CCF9F425493218005080C5 /* Dryable.swift */; };
 		15CCFA03254932B9005080C5 /* TeaAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CCFA02254932B9005080C5 /* TeaAble.swift */; };
 		15F2C2F924BC041E00A75AEC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C2F824BC041E00A75AEC /* Constants.swift */; };
-		24117C6B60BC5C535380ADC5 /* Pods_UGArden_Herbs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038B2C9D84F8607868C8E09C /* Pods_UGArden_Herbs.framework */; };
 		D7B871E725EC6C9B0088540A /* PlantNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B871E625EC6C9B0088540A /* PlantNames.swift */; };
+		D7B871F225EC7FC20088540A /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B871EC25EC7FC20088540A /* UIImageViewExtension.swift */; };
+		D7B871F325EC7FC20088540A /* CIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B871ED25EC7FC20088540A /* CIImageExtension.swift */; };
+		D7B871F425EC7FC20088540A /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B871EF25EC7FC20088540A /* CIColorExtension.swift */; };
+		D7B871F525EC7FC20088540A /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B871F025EC7FC20088540A /* QRCode.swift */; };
+		D7B871FA25EC80780088540A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7B871F925EC80780088540A /* SnapKit */; };
+		D7B871FE25EC80B30088540A /* SuggestionRow in Frameworks */ = {isa = PBXBuildFile; productRef = D7B871FD25EC80B30088540A /* SuggestionRow */; };
+		D7B8720225EC80FF0088540A /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720125EC80FF0088540A /* RxSwift */; };
+		D7B8720425EC80FF0088540A /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720325EC80FF0088540A /* RxRelay */; };
+		D7B8720625EC80FF0088540A /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720525EC80FF0088540A /* RxCocoa */; };
+		D7B8720825EC80FF0088540A /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720725EC80FF0088540A /* RxBlocking */; };
+		D7B8720C25EC81560088540A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720B25EC81560088540A /* Alamofire */; };
+		D7B8721025EC82000088540A /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720F25EC82000088540A /* RxAlamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		038B2C9D84F8607868C8E09C /* Pods_UGArden_Herbs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UGArden_Herbs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13410ACD217923920032FC6F /* font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = font; sourceTree = "<group>"; };
 		1342AA4B21802C4200863649 /* ViewDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataViewController.swift; sourceTree = "<group>"; };
 		134A743E213EC54900640347 /* UGArden Herbs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UGArden Herbs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,9 +71,13 @@
 		15CCF9F425493218005080C5 /* Dryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dryable.swift; sourceTree = "<group>"; };
 		15CCFA02254932B9005080C5 /* TeaAble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaAble.swift; sourceTree = "<group>"; };
 		15F2C2F824BC041E00A75AEC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		9711FAA7B2FEFE2FCA96BA5B /* Pods-UGArden Herbs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UGArden Herbs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs.debug.xcconfig"; sourceTree = "<group>"; };
 		D7B871E625EC6C9B0088540A /* PlantNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantNames.swift; sourceTree = "<group>"; };
-		E5918A0AAE7F8758F51568F7 /* Pods-UGArden Herbs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UGArden Herbs.release.xcconfig"; path = "Pods/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs.release.xcconfig"; sourceTree = "<group>"; };
+		D7B871EC25EC7FC20088540A /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		D7B871ED25EC7FC20088540A /* CIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIImageExtension.swift; sourceTree = "<group>"; };
+		D7B871EE25EC7FC20088540A /* QRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCode.h; sourceTree = "<group>"; };
+		D7B871EF25EC7FC20088540A /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
+		D7B871F025EC7FC20088540A /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
+		D7B871F125EC7FC20088540A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +85,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24117C6B60BC5C535380ADC5 /* Pods_UGArden_Herbs.framework in Frameworks */,
+				D7B8720225EC80FF0088540A /* RxSwift in Frameworks */,
+				D7B8720C25EC81560088540A /* Alamofire in Frameworks */,
+				D7B8720825EC80FF0088540A /* RxBlocking in Frameworks */,
+				D7B871FA25EC80780088540A /* SnapKit in Frameworks */,
+				D7B8720625EC80FF0088540A /* RxCocoa in Frameworks */,
+				D7B8721025EC82000088540A /* RxAlamofire in Frameworks */,
+				D7B8720425EC80FF0088540A /* RxRelay in Frameworks */,
+				D7B871FE25EC80B30088540A /* SuggestionRow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,8 +104,6 @@
 			children = (
 				134A7440213EC54900640347 /* UGArden Herbs */,
 				134A743F213EC54900640347 /* Products */,
-				651114DA019AB7304049DA3F /* Pods */,
-				C997C86F0CD26FBE8C7EE325 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +123,7 @@
 				15CCF9F025493183005080C5 /* FormBase */,
 				15AB09C325493C20008C3306 /* FormClasses */,
 				15CCF9E325492959005080C5 /* Models */,
+				D7B871EB25EC7FC20088540A /* QRCode */,
 				15CCF9E225492937005080C5 /* Print+QR */,
 				134A7441213EC54900640347 /* AppDelegate.swift */,
 				134A7445213EC54900640347 /* Main.storyboard */,
@@ -176,21 +196,18 @@
 			path = Startup;
 			sourceTree = "<group>";
 		};
-		651114DA019AB7304049DA3F /* Pods */ = {
+		D7B871EB25EC7FC20088540A /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
-				9711FAA7B2FEFE2FCA96BA5B /* Pods-UGArden Herbs.debug.xcconfig */,
-				E5918A0AAE7F8758F51568F7 /* Pods-UGArden Herbs.release.xcconfig */,
+				D7B871EC25EC7FC20088540A /* UIImageViewExtension.swift */,
+				D7B871ED25EC7FC20088540A /* CIImageExtension.swift */,
+				D7B871EE25EC7FC20088540A /* QRCode.h */,
+				D7B871EF25EC7FC20088540A /* CIColorExtension.swift */,
+				D7B871F025EC7FC20088540A /* QRCode.swift */,
+				D7B871F125EC7FC20088540A /* Info.plist */,
 			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		C997C86F0CD26FBE8C7EE325 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				038B2C9D84F8607868C8E09C /* Pods_UGArden_Herbs.framework */,
-			);
-			name = Frameworks;
+			name = QRCode;
+			path = "../../Downloads/QRCode-master/QRCode";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,17 +217,25 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 134A7453213EC55200640347 /* Build configuration list for PBXNativeTarget "UGArden Herbs" */;
 			buildPhases = (
-				EAE09E3340922B656EE23AB4 /* [CP] Check Pods Manifest.lock */,
 				134A743A213EC54900640347 /* Sources */,
 				134A743B213EC54900640347 /* Frameworks */,
 				134A743C213EC54900640347 /* Resources */,
-				ECF6D059A0F6A8210B065EB0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "UGArden Herbs";
+			packageProductDependencies = (
+				D7B871F925EC80780088540A /* SnapKit */,
+				D7B871FD25EC80B30088540A /* SuggestionRow */,
+				D7B8720125EC80FF0088540A /* RxSwift */,
+				D7B8720325EC80FF0088540A /* RxRelay */,
+				D7B8720525EC80FF0088540A /* RxCocoa */,
+				D7B8720725EC80FF0088540A /* RxBlocking */,
+				D7B8720B25EC81560088540A /* Alamofire */,
+				D7B8720F25EC82000088540A /* RxAlamofire */,
+			);
 			productName = Capstone;
 			productReference = 134A743E213EC54900640347 /* UGArden Herbs.app */;
 			productType = "com.apple.product-type.application";
@@ -222,7 +247,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = NMI;
 				TargetAttributes = {
 					134A743D213EC54900640347 = {
@@ -239,6 +264,13 @@
 				Base,
 			);
 			mainGroup = 134A7435213EC54900640347;
+			packageReferences = (
+				D7B871F825EC80780088540A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D7B871FC25EC80B30088540A /* XCRemoteSwiftPackageReference "SuggestionRow" */,
+				D7B8720025EC80FF0088540A /* XCRemoteSwiftPackageReference "RxSwift" */,
+				D7B8720A25EC81560088540A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				D7B8720E25EC82000088540A /* XCRemoteSwiftPackageReference "RxAlamofire" */,
+			);
 			productRefGroup = 134A743F213EC54900640347 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,44 +294,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		EAE09E3340922B656EE23AB4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-UGArden Herbs-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ECF6D059A0F6A8210B065EB0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		134A743A213EC54900640347 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -309,12 +303,16 @@
 				15F2C2F924BC041E00A75AEC /* Constants.swift in Sources */,
 				15CCFA03254932B9005080C5 /* TeaAble.swift in Sources */,
 				15CCF9F225493197005080C5 /* Seedable.swift in Sources */,
+				D7B871F425EC7FC20088540A /* CIColorExtension.swift in Sources */,
+				D7B871F525EC7FC20088540A /* QRCode.swift in Sources */,
 				13A3AD5921543C8B0067A55D /* TeaForm.swift in Sources */,
 				13A3AD5B215A91270067A55D /* FormUtils.swift in Sources */,
 				D7B871E725EC6C9B0088540A /* PlantNames.swift in Sources */,
 				135E7A002194E34F00EB7932 /* DataViewPopUp.swift in Sources */,
+				D7B871F225EC7FC20088540A /* UIImageViewExtension.swift in Sources */,
 				1342AA4C21802C4200863649 /* ViewDataViewController.swift in Sources */,
 				13A3AD57215437820067A55D /* SeedingForm.swift in Sources */,
+				D7B871F325EC7FC20088540A /* CIImageExtension.swift in Sources */,
 				13A3AD5521515C050067A55D /* InitialNavViewController.swift in Sources */,
 				136BCBEC21ACAA1B0039BA82 /* DataViewForm.swift in Sources */,
 				13DC36122241E99800E8045F /* LayoutProtocols.swift in Sources */,
@@ -376,6 +374,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -401,7 +400,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -436,6 +435,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -455,7 +455,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -466,7 +466,6 @@
 		};
 		134A7454213EC55200640347 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9711FAA7B2FEFE2FCA96BA5B /* Pods-UGArden Herbs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -487,7 +486,6 @@
 		};
 		134A7455213EC55200640347 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5918A0AAE7F8758F51568F7 /* Pods-UGArden Herbs.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -528,6 +526,92 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D7B871F825EC80780088540A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		D7B871FC25EC80B30088540A /* XCRemoteSwiftPackageReference "SuggestionRow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EurekaCommunity/SuggestionRow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
+		D7B8720025EC80FF0088540A /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.0;
+			};
+		};
+		D7B8720A25EC81560088540A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+		D7B8720E25EC82000088540A /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxAlamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D7B871F925EC80780088540A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B871F825EC80780088540A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		D7B871FD25EC80B30088540A /* SuggestionRow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B871FC25EC80B30088540A /* XCRemoteSwiftPackageReference "SuggestionRow" */;
+			productName = SuggestionRow;
+		};
+		D7B8720125EC80FF0088540A /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B8720025EC80FF0088540A /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		D7B8720325EC80FF0088540A /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B8720025EC80FF0088540A /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		D7B8720525EC80FF0088540A /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B8720025EC80FF0088540A /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		D7B8720725EC80FF0088540A /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B8720025EC80FF0088540A /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		D7B8720B25EC81560088540A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B8720A25EC81560088540A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		D7B8720F25EC82000088540A /* RxAlamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B8720E25EC82000088540A /* XCRemoteSwiftPackageReference "RxAlamofire" */;
+			productName = RxAlamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 134A7436213EC54900640347 /* Project object */;
 }

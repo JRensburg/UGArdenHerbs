@@ -6,10 +6,9 @@
 //  Copyright © 2020 NMI. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Eureka
 import SuggestionRow
-import QRCode
 
 protocol Dryable {
     var dateFormatter : DateFormatter? {get set}

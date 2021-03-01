@@ -10,7 +10,6 @@ import UIKit
 import Eureka
 import SnapKit
 import Alamofire
-import QRCode
 import AVFoundation
 import SuggestionRow
 

@@ -5,7 +5,7 @@
 //  Created by Jaco Van Rensburg on 9/25/18.
 //  Copyright © 2018 NMI. All rights reserved.
 //
-
+import UIKit
 import Foundation
 import Alamofire
 import Eureka
