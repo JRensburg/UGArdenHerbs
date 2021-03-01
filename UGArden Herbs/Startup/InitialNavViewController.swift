@@ -29,7 +29,7 @@ class IntroViewController: UITableViewController{
         }
         buttonItem.addTarget(self, action: #selector(showAlertController), for: .touchUpInside)
         buttonItem.imageView?.contentMode = .scaleAspectFit
-        buttonItem.setImage(UIImage(named: "leaf"), for: .normal)
+        buttonItem.setImage(UIImage(named: "leaf")?.withRenderingMode(.alwaysTemplate), for: .normal)
         buttonItem.tintColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1)
         self.navigationItem.setRightBarButton(UIBarButtonItem(customView: buttonItem), animated: true)
     }

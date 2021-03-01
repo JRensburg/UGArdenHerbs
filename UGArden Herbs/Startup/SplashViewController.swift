@@ -53,9 +53,9 @@ class SplashViewController : UIViewController, CLLocationManagerDelegate {
         navigate.backgroundColor = UIColor.lightGray
         navigate.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: navigate.frame.height))
         navigate.leftViewMode = .always
-        let textObserve = navigate.rx.text.orEmpty.debug().debounce(.milliseconds(300), scheduler: MainScheduler.instance).filter{$0 == ""}//Holybasil"}//.subscribe{self.navAction()}.disposed(by: DisposeBag())
-        textObserve.subscribe{[weak self] val in
-            self?.navAction()
+        let textObserve = navigate.rx.text.orEmpty.debug().debounce(.milliseconds(300), scheduler: MainScheduler.instance).filter{$0 == AirtableURLs.appCode}
+        textObserve.subscribe{ val in
+            self.navAction()
         }.disposed(by: disposeBag)
     }
     
