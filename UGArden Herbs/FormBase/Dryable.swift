@@ -154,15 +154,15 @@ extension Dryable where Self: FormViewController & PrintUtils {
     
     func addScanToForm() {
         form +++ Section("QR Code")
-            <<< ButtonRow(){
-                $0.title = "Generate Label"
-                $0.onCellSelection(self.makeOtherLabel)
+            <<< ButtonRow(){[weak self] row in
+                row.title = "Generate Label"
+                row.onCellSelection({cell, row  in self?.makeOtherLabel(cell: cell, row: row)})
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
-            <<< ButtonRow(){
+            <<< ButtonRow(){[weak self] in
                 $0.title = "Scan Label"
-                $0.onCellSelection(self.showScanner)
+                $0.onCellSelection({cell, row  in self?.showScanner(cell: cell, row: row)})
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
         }

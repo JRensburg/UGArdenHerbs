@@ -16,7 +16,7 @@ import SuggestionRow
 /*
  For reference: label may need to be around 2.4 inches to whatever length 
 */
-class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutputObjectsDelegate, PrintUtils,Dryable{
+class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutputObjectsDelegate, PrintUtils, Dryable{
 
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
@@ -45,14 +45,14 @@ class HerbFormController: FormViewController, FormUtils, AVCaptureMetadataOutput
         addScanToForm()
         configureSecondHalf()
         form +++ Section("Submit")
-            <<< ButtonRow("Submit"){
+            <<< ButtonRow("Submit"){[weak self] in
                 $0.title = "Post!"
-                $0.onCellSelection(self.buttonTapped)
+                $0.onCellSelection({cell, row in self?.buttonTapped(cell: cell, row: row)})
                 }.cellUpdate{ cell, row in
                     cell.height = {return 70}
             }
-            <<< ButtonRow("Clear"){ row in
-                row.onCellSelection(self.buttonTapped)
+            <<< ButtonRow("Clear"){[weak self] row in
+                row.onCellSelection({cell, row in self?.buttonTapped(cell: cell, row: row)})
                 }.cellUpdate{cell, row in
                     cell.textLabel?.attributedText = NSMutableAttributedString(string: "Clear Form", attributes: [.foregroundColor: UIColor.red])
                     cell.height = {return 70}

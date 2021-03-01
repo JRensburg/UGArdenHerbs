@@ -43,6 +43,7 @@
 		D7B8720825EC80FF0088540A /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720725EC80FF0088540A /* RxBlocking */; };
 		D7B8720C25EC81560088540A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720B25EC81560088540A /* Alamofire */; };
 		D7B8721025EC82000088540A /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D7B8720F25EC82000088540A /* RxAlamofire */; };
+		D7B8721825EC853A0088540A /* DataPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8721725EC853A0088540A /* DataPopupController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		D7B871EF25EC7FC20088540A /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
 		D7B871F025EC7FC20088540A /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
 		D7B871F125EC7FC20088540A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7B8721725EC853A0088540A /* DataPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPopupController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				1396C75521B6133D00A451E2 /* TableViewCells.swift */,
 				136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */,
 				135E79FF2194E34F00EB7932 /* DataViewPopUp.swift */,
+				D7B8721725EC853A0088540A /* DataPopupController.swift */,
 			);
 			path = DataOverview;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				15CCFA03254932B9005080C5 /* TeaAble.swift in Sources */,
 				15CCF9F225493197005080C5 /* Seedable.swift in Sources */,
 				D7B871F425EC7FC20088540A /* CIColorExtension.swift in Sources */,
+				D7B8721825EC853A0088540A /* DataPopupController.swift in Sources */,
 				D7B871F525EC7FC20088540A /* QRCode.swift in Sources */,
 				13A3AD5921543C8B0067A55D /* TeaForm.swift in Sources */,
 				13A3AD5B215A91270067A55D /* FormUtils.swift in Sources */,

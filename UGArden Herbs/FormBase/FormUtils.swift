@@ -61,7 +61,7 @@ extension FormUtils where Self: FormViewController {
         ]
         print(postParam)
 
-        let almoRequest = AF.request(postUrl, method: .post, parameters: postParam, encoding: JSONEncoding.default).responseJSON { response in
+        let almoRequest = AF.request(postUrl, method: .post, parameters: postParam, encoding: JSONEncoding.default).responseJSON {[weak self] response in
             print(response)
             let message = String(data: response.data!, encoding: .utf8)
             var alert: UIAlertController
@@ -83,7 +83,7 @@ extension FormUtils where Self: FormViewController {
                 case .destructive:
                     print("destructive")
                 } }))
-            self.present(alert, animated: true, completion: nil)
+            self?.present(alert, animated: true, completion: nil)
 
         }
         print(almoRequest)

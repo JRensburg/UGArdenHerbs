@@ -47,9 +47,9 @@ class DataViewForm: FormViewController, FormUtils, Seedable, Dryable, TeaAble, P
         self.navigationItem.title = viewItem.title
         configureTheForm()
         form +++ Section("Finish Editing")
-            <<< ButtonRow("Finish"){
+            <<< ButtonRow("Finish"){[weak self] in
                 $0.title = "Submit Edits"
-                $0.onCellSelection(self.submitChanges)
+                $0.onCellSelection({cell, row in self?.submitChanges(cell: cell, row: row)})
                 }.cellUpdate{cell, row in
                     cell.height = {return 70}
                     cell.textLabel?.textColor = UIColor.white

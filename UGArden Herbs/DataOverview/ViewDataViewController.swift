@@ -32,15 +32,14 @@ class ViewDataViewController: UIViewController, navDelegate, UITableViewDelegate
         configureProperties()
         configureLayout()
         tableView.rx.itemSelected.throttle(.seconds(1), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] indexPath in
-            let cell = self?.tableView.cellForRow(at: indexPath) as! CustomCell
+            guard let self = self else {return}
+            let cell = self.tableView.cellForRow(at: indexPath) as! CustomCell
             if let dataModel = cell.model {
-                let infoView = DataViewPopUp(model: dataModel)
-                infoView.navdelgate = self
-                self?.view.addSubview(infoView)
-                infoView.center = (self?.view.center)!
-                self!.flipSubViews()
-                infoView.rx.deallocated.subscribe(onDisposed: {self?.flipSubViews()}).disposed(by: self!.disposeBag)
-                self?.tableView.deselectRow(at: indexPath, animated: true)
+                let child = DataViewPopUpController(model: dataModel, refreshObservable: self.refreshObservable)
+                self.definesPresentationContext = true
+                self.modalPresentationStyle = .pageSheet
+                self.present(child, animated: true, completion: nil)
+                self.tableView.deselectRow(at: indexPath, animated: true)
             }
         }).disposed(by: disposeBag)
     }
@@ -65,12 +64,14 @@ class ViewDataViewController: UIViewController, navDelegate, UITableViewDelegate
                 return self.urls[index]
             }.flatMapLatest({APIClient.pull(url: $0)})
         //Models is now a stream of dataModels
-        models.flatMapLatest({data -> Observable<[dataModel]> in
+        models.flatMapLatest({[weak self] data -> Observable<[dataModel]> in
             //This creates a stream with a blank header inserted at index 0
             var model = data
-            model.insert(dataModel(id: "Header", createdTime: "Now", fields: AnyFormModel(index: self.segmentedControl.selectedSegmentIndex)), at: 0)
+            if let self = self {
+                model.insert(dataModel(id: "Header", createdTime: "Now", fields: AnyFormModel(index: self.segmentedControl.selectedSegmentIndex)), at: 0)
+            }
             return Observable.just(model)
-        }).bind(to: tableView.rx.items(cellIdentifier: "dryingCell", cellType: CustomCell.self )){ index, model, cell in
+        }).bind(to: tableView.rx.items(cellIdentifier: "dryingCell", cellType: CustomCell.self)){ index, model, cell in
             //Configures the cell according to which data it is given
             cell.layoutCell(model: model)
             }.disposed(by: disposeBag)

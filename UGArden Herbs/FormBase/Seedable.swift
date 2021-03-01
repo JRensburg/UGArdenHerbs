@@ -65,17 +65,17 @@ extension Seedable where Self: FormViewController & FormUtils {
             cell.height = { return 70 }
         }
         form +++ Section("Submit")
-        <<< ButtonRow("Submit") {
+        <<< ButtonRow("Submit") {[weak self] in
             $0.title = "Submit"
-            $0.onCellSelection(self.buttonTapped)
+            $0.onCellSelection({cell, row in self?.buttonTapped(cell: cell, row: row)})
         }.cellUpdate { cell, row in
             cell.height = { return 70 }
         }
-        <<< ButtonRow("Clear") { row in
-            row.onCellSelection(self.buttonTapped)
+        <<< ButtonRow("Clear") {[weak self] row in
+            row.onCellSelection({cell, row in self?.buttonTapped(cell: cell, row: row)})
         }.cellUpdate { cell, row in
-            cell.textLabel?.attributedText = NSMutableAttributedString(string: "Clear Form", attributes: [.foregroundColor: UIColor.red])
             cell.height = { return 70 }
+            cell.textLabel?.attributedText = NSMutableAttributedString(string: "Clear Form", attributes: [.foregroundColor: UIColor.red])
         }
     }
 }

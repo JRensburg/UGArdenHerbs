@@ -20,7 +20,6 @@ class IntroViewController: UITableViewController{
         navigationController?.setNavigationBarHidden(false, animated: true)
         self.view.backgroundColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1)
         let imageView = UIImageView(image: #imageLiteral(resourceName: "logo"))
-
         imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: (self.navigationController?.navigationBar.frame.size.height)!)
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
@@ -30,7 +29,7 @@ class IntroViewController: UITableViewController{
         }
         buttonItem.addTarget(self, action: #selector(showAlertController), for: .touchUpInside)
         buttonItem.imageView?.contentMode = .scaleAspectFit
-        buttonItem.setImage(UIImage(named: "settings"), for: .normal)
+        buttonItem.setImage(UIImage(named: "leaf"), for: .normal)
         buttonItem.tintColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1)
         self.navigationItem.setRightBarButton(UIBarButtonItem(customView: buttonItem), animated: true)
     }
