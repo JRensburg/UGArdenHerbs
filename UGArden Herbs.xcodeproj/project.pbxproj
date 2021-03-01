@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13410ACE217923920032FC6F /* font in Resources */ = {isa = PBXBuildFile; fileRef = 13410ACD217923920032FC6F /* font */; };
-		1342AA4C21802C4200863649 /* ViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342AA4B21802C4200863649 /* ViewData.swift */; };
+		1342AA4C21802C4200863649 /* ViewDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342AA4B21802C4200863649 /* ViewDataViewController.swift */; };
 		134A7442213EC54900640347 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134A7441213EC54900640347 /* AppDelegate.swift */; };
 		134A7444213EC54900640347 /* DryingForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134A7443213EC54900640347 /* DryingForm.swift */; };
 		134A7447213EC54900640347 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134A7445213EC54900640347 /* Main.storyboard */; };
@@ -31,12 +31,13 @@
 		15CCFA03254932B9005080C5 /* TeaAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CCFA02254932B9005080C5 /* TeaAble.swift */; };
 		15F2C2F924BC041E00A75AEC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C2F824BC041E00A75AEC /* Constants.swift */; };
 		24117C6B60BC5C535380ADC5 /* Pods_UGArden_Herbs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038B2C9D84F8607868C8E09C /* Pods_UGArden_Herbs.framework */; };
+		D7B871E725EC6C9B0088540A /* PlantNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B871E625EC6C9B0088540A /* PlantNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		038B2C9D84F8607868C8E09C /* Pods_UGArden_Herbs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UGArden_Herbs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13410ACD217923920032FC6F /* font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = font; sourceTree = "<group>"; };
-		1342AA4B21802C4200863649 /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
+		1342AA4B21802C4200863649 /* ViewDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataViewController.swift; sourceTree = "<group>"; };
 		134A743E213EC54900640347 /* UGArden Herbs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UGArden Herbs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		134A7441213EC54900640347 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		134A7443213EC54900640347 /* DryingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DryingForm.swift; sourceTree = "<group>"; };
@@ -61,6 +62,7 @@
 		15CCFA02254932B9005080C5 /* TeaAble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaAble.swift; sourceTree = "<group>"; };
 		15F2C2F824BC041E00A75AEC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9711FAA7B2FEFE2FCA96BA5B /* Pods-UGArden Herbs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UGArden Herbs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs.debug.xcconfig"; sourceTree = "<group>"; };
+		D7B871E625EC6C9B0088540A /* PlantNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantNames.swift; sourceTree = "<group>"; };
 		E5918A0AAE7F8758F51568F7 /* Pods-UGArden Herbs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UGArden Herbs.release.xcconfig"; path = "Pods/Target Support Files/Pods-UGArden Herbs/Pods-UGArden Herbs.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,7 +129,7 @@
 		15AB09C425493C39008C3306 /* DataOverview */ = {
 			isa = PBXGroup;
 			children = (
-				1342AA4B21802C4200863649 /* ViewData.swift */,
+				1342AA4B21802C4200863649 /* ViewDataViewController.swift */,
 				13DC36112241E99800E8045F /* LayoutProtocols.swift */,
 				1396C75521B6133D00A451E2 /* TableViewCells.swift */,
 				136BCBEB21ACAA1B0039BA82 /* DataViewForm.swift */,
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				13E5B6B7219B5DC300585B38 /* DataModels.swift */,
+				D7B871E625EC6C9B0088540A /* PlantNames.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,8 +311,9 @@
 				15CCF9F225493197005080C5 /* Seedable.swift in Sources */,
 				13A3AD5921543C8B0067A55D /* TeaForm.swift in Sources */,
 				13A3AD5B215A91270067A55D /* FormUtils.swift in Sources */,
+				D7B871E725EC6C9B0088540A /* PlantNames.swift in Sources */,
 				135E7A002194E34F00EB7932 /* DataViewPopUp.swift in Sources */,
-				1342AA4C21802C4200863649 /* ViewData.swift in Sources */,
+				1342AA4C21802C4200863649 /* ViewDataViewController.swift in Sources */,
 				13A3AD57215437820067A55D /* SeedingForm.swift in Sources */,
 				13A3AD5521515C050067A55D /* InitialNavViewController.swift in Sources */,
 				136BCBEC21ACAA1B0039BA82 /* DataViewForm.swift in Sources */,

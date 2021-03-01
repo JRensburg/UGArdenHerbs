@@ -69,7 +69,7 @@ class SplashViewController : UIViewController, CLLocationManagerDelegate {
     func navAction() {
 //        let top = UIApplication.shared.keyWindow?.rootViewController
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "IntroView") as! IntroView
+        let vc = storyBoard.instantiateViewController(withIdentifier: "IntroView") as! IntroViewController
 //        let navigationController = UINavigationController.init(rootViewController: vc)
         navigationController?.setViewControllers([vc], animated: true)
     }

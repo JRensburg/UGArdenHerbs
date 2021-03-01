@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 import RxAlamofire
 
-class ViewData: UIViewController, navDelegate, UITableViewDelegate{
+class ViewDataViewController: UIViewController, navDelegate, UITableViewDelegate{
     
     private let tableView = UITableView()
     private let label = UILabel()

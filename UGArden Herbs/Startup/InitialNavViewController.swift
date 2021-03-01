@@ -11,7 +11,7 @@ import UIKit
 import CoreImage
 import SnapKit
 
-class IntroView: UITableViewController{
+class IntroViewController: UITableViewController{
     
     let sectionNames: [(String,String)] = [("Seeding Form","seeds-blur.jpg"), ("Drying Form","orange-blur.jpg"), ("Tea Form","flower-blur.jpg"),("View Data","basil-blur.jpg")]
     
@@ -24,6 +24,15 @@ class IntroView: UITableViewController{
         imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: (self.navigationController?.navigationBar.frame.size.height)!)
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
+        let buttonItem = UIButton()
+        buttonItem.snp.makeConstraints {
+            $0.height.width.equalTo(36)
+        }
+        buttonItem.addTarget(self, action: #selector(showAlertController), for: .touchUpInside)
+        buttonItem.imageView?.contentMode = .scaleAspectFit
+        buttonItem.setImage(UIImage(named: "settings"), for: .normal)
+        buttonItem.tintColor = UIColor(red: 138/255, green: 158/255, blue: 87/255, alpha: 1)
+        self.navigationItem.setRightBarButton(UIBarButtonItem(customView: buttonItem), animated: true)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,3 +98,12 @@ class IntroCell : UITableViewCell {
 }
 
 
+//MARK: - Fetch and Store Plant Names
+extension IntroViewController {
+    @objc func showAlertController() {
+        let alertController = UIAlertController(title: "Refresh Plant Names", message: "This will allow for any changes to the list of plant names to be used by the app", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Refresh", style: .default, handler: {_ in PlantNames.shared.refresh()}))
+        alertController.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+        self.present(alertController, animated: true, completion: nil)
+    }
+}

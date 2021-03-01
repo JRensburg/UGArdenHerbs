@@ -64,7 +64,7 @@ extension Dryable where Self: FormViewController & PrintUtils {
             <<< SuggestionAccessoryRow<String>("Crop"){
                 $0.title = "Crop Name"
                 $0.filterFunction = { text in
-                    options.filter({$0.hasPrefix(text)})
+                    PlantNames.shared.names.filter({$0.hasPrefix(text)})
                 }
                 $0.add(rule: RuleRequired())
                 $0.validationOptions = .validatesOnChange

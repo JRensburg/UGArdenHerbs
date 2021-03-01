@@ -205,8 +205,6 @@ public class APIClient {
 }
 
 
-//Not Really Data Models, but used for the suggestion rows
-public let options = ["Ashwagandha","Basil","Blue vervain","Blueberry leaves","Calendula","Chamomile","Comfre","Dandelion","Echinacea","Elderberry","Ginger","Goldenrod","Hawthorne","Hibiscus","Holy basil, Kapoor","Holy basil, Krishna","Holy basil, Vana","Lemon balm","Lemon verbena","Lemongrass","Licorice Mint","Luffa","Marjoram","Motherwort","Oats","Oregano","Parsley","Passionflower","Peppermint","Plantain","Red clover","Red Rose","Rose Hip","Rosemary","Skullcap","Stevia","Stinging nettle","Thyme","Yarrow","Yaupon holly"]
 public let parts = ["Herb","Flowering Tops","Leaf","Flower","Root","Calyx"]
 
 //Convenience Methods that convert my data structs to dictionaries. Used primarily by DataViewPopUp to fill out the forms
