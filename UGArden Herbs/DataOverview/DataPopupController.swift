@@ -53,40 +53,12 @@ class DataViewPopUpController: UIViewController, UITableViewDelegate {
         view.addSubview(toolBar)
         toolBar.snp.makeConstraints {
             $0.left.right.top.equalToSuperview()
-//            $0.height.equalTo(88)
         }
         let dismissButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(buttonTapped))
         let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteTapped))
         toolBar.setItems([dismissButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), editButton, deleteButton], animated: true)
         view.addSubview(remove)
-//
-//        remove.setTitle("Dismiss", for: .normal)
-//        remove.snp.makeConstraints{
-//            $0.top.left.equalToSuperview()
-//            $0.height.equalToSuperview().dividedBy(12)
-//            $0.width.equalToSuperview().dividedBy(4)
-//        }
-//        remove.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-//        view.addSubview(update)
-//        view.addSubview(delete)
-//        delete.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
-//        delete.setImage(UIImage(named: "bettererTrash.png"), for: .normal)
-//        delete.snp.makeConstraints{
-//            $0.top.equalToSuperview()
-//            $0.height.equalToSuperview().dividedBy(12)
-//            $0.width.equalToSuperview().dividedBy(11)
-//            $0.right.equalToSuperview()
-//        }
-//    update.setImage(UIImage(named: "evenBetterEdit.png"), for: .normal)
-//    update.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
-//    update.snp.makeConstraints{
-//        $0.top.equalToSuperview()
-//        $0.height.equalToSuperview().dividedBy(12)
-//        $0.width.equalToSuperview().dividedBy(11)
-//        $0.right.equalTo(delete.snp.left)
-//    }
-//        update.imageEdgeInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
 
         tableView.backgroundView = nil
     }
